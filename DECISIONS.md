@@ -6,6 +6,12 @@ Record *what was decided and why*, not just what changed.
 
 ---
 
+## 2026-11-10 — Wix salvage landed
+
+- A read-only extraction of Greg's Wix account recovered everything of value into `_old-website/`: verbatim Home and Bio page copy (`copy/`), all 40 media files under their original names (`images/`, `audio/`, `videos/`; full list in `MANIFEST.md`), and the site's outbound links (`links.md`).
+- The Wix account holds one free-plan site with NO custom domain and NO billing or subscriptions — nothing is being paid for, and nothing of Greg's would be lost by leaving Wix.
+- Two videos over GitHub's 100 MB file limit are not in this repo; they live in the local archive at `~/workspace/website-avril/wix-salvage-local-archive/`.
+
 ## 2026-11-10 — Architecture (decided by Greg, before the first build)
 
 - **Canonical copy:** The site's files live in ONE place: a GitHub repository
