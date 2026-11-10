@@ -42,3 +42,6 @@ Record *what was decided and why*, not just what changed.
 - Exemplar Greg admires: Audrey's site. Less about her as a figure, more about what she does. A dynamic water droplet falling into a lake; clicking it opens the page: clean links over a beautiful high-def watery background, links to her recorded tracks and information about them. Alive and moving, not static.
 - Greg's own floated image: land on his smiling face, click his sparkling eye, and it takes you in. (Same move as the droplet: one evocative image as the door.)
 - Principles: the design may be complex in construction but must OCCUR simple. All of Greg's domains/hats present, but encountered simply and accessibly. A visitor should easily find ways to work with him and reasons to work with him. NO overwhelm: not piles of menus, lists, words, copy, descriptions, or titles with parameters and rates.
+
+## Access arrangement — Nov 10, 2026
+- Muse (Greg's AI assistant) holds push access to this repository via an SSH key titled "Muse — website access" in Greg's GitHub account settings, added Nov 10, 2026 at Greg's direction. Greg directs all changes in conversation; the key can be revoked by Greg at any time in GitHub Settings → SSH and GPG keys.
