@@ -45,3 +45,11 @@ Record *what was decided and why*, not just what changed.
 
 ## Access arrangement — Nov 10, 2026
 - Muse (Greg's AI assistant) holds push access to this repository via an SSH key titled "Muse — website access" in Greg's GitHub account settings, added Nov 10, 2026 at Greg's direction. Greg directs all changes in conversation; the key can be revoked by Greg at any time in GitHub Settings → SSH and GPG keys.
+
+## Materials zones — Nov 10, 2026 (Greg's design)
+- ONE shared place: this repository. Everything lives here so Avril has access to decided and undecided materials alike; no separate drive or local-only holding folder.
+- **Decided/live** = the site itself (root files + `assets/`): published at the site address.
+- **Undecided** = `_undecided/`: candidates being weighed. Underscore folders are excluded from the published site by GitHub Pages, so these files live in the project without becoming part of the website.
+- **Old website salvage** = `_old-website/`: whatever is recovered from Greg's Wix site, kept as raw ingredients.
+- Greg has weighed the public-repo visibility of these zones (anyone browsing the repository could see them, and git history retains deletions) and accepts it: the material is provisional photos and copy, not secrets.
+- Graduating a file = moving it from `_undecided/` into the site and noting it here.
