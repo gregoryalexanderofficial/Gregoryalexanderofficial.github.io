@@ -4,7 +4,7 @@ Prepared November 12, 2026, for Avril Johnnidis, ahead of the first working call
 Part 1 is the project as it stands. Part 2 is copy Greg has already approved, verbatim,
 with a status label on each piece, so it can be pulled from safely, plus a rates
 reference section holding the official numbers in one place. Part 3 is the design
-dreaming so far. Anything new written for the site goes through Greg before it is used.
+dreaming so far. Part 4 covers working on the site with an AI. Anything new written for the site goes through Greg before it is used.
 
 ---
 
@@ -136,3 +136,74 @@ Draft copy candidates, kept minimal (DRAFT, awaiting Greg's approval):
 - Exemplar Greg admires: Audrey's site. It is less about her as a figure and more about what she does. A dynamic water droplet falls into a lake; clicking it opens the page: clean links over a beautiful, moving, watery background, her tracks one click away. Alive, not static.
 - Greg's own floated image for his door: land on his smiling face, click his sparkling eye, and it takes you in. Same move as the droplet: one evocative image as the threshold.
 - Principles: the design may be complex in construction but must occur simple in experience. All of Greg's domains and hats are present, but encountered simply and accessibly. A visitor should easily find ways to work with him, and reasons to work with him. No overwhelm: no piles of menus, lists, descriptions, or rates.
+
+## Part 4: Working on the site with an AI (researched November 12, 2026)
+
+Avril does not need any particular AI to work on this site. She needs a GitHub
+account (free) and one of the paths below. Prices are as of November 2026 and
+change often; treat them as orientation, not quotes.
+
+The simple truth about the options: the chat AIs (Claude, ChatGPT, Gemini) can all
+read the site's files and draft changes, but on their own they cannot save changes
+into GitHub. Saving happens one of three ways: she pastes the AI's finished file
+into GitHub's free browser editor herself, she uses an "agent" tool that opens a
+pull request (a proposed change Greg can review and accept), or she works in an
+AI editor program on her own computer.
+
+The recommended paths, in order:
+
+1. **Claude** (claude.ai). Free tier: the chat can connect to the GitHub repo
+   read-only, hold the project in a Project, and draft edits she can preview and
+   paste in. Pro ($20/month, or $17/month billed annually) unlocks Claude Code on
+   the web: she connects the repo, describes the change in plain words, and it
+   edits the actual HTML and CSS files in place, then proposes the change as a
+   pull request for review. Nothing to install; works in the browser. This is
+   also the same assistant family Greg works with, so habits and instructions
+   transfer between them easily. Best overall fit for this project.
+
+2. **GitHub Copilot** (inside GitHub itself). Free tier exists but cannot make
+   changes for her. Pro ($10/month, the cheapest true agent option) adds the
+   Copilot cloud agent: she writes an Issue in plain English ("change the
+   headline on the About section to..."), assigns it to Copilot, and it always
+   produces a pull request for a human to review before anything goes live.
+   Lives entirely inside the GitHub account she needs anyway.
+
+3. **Google Jules** (jules.google.com). Free. A browser-only agent that works
+   only with GitHub: she picks the repo, describes a task, approves its plan,
+   and it opens a pull request. Generous free limits (15 tasks a day). The best
+   fully free delegation path.
+
+Worth knowing about the others:
+
+- **ChatGPT**: free tier is fine for drafting text and copy. Its GitHub
+  connection is read-only; making actual changes requires Codex, which starts
+  at the Plus tier ($20/month). Works, but no advantage here over Claude.
+- **Gemini**: the chat has no way to save changes to GitHub, and Google's free
+  coding tools for individuals were discontinued in 2026. Jules (above) is the
+  Google tool that fits this project.
+- **Replit**: genuinely beginner-friendly, and its Agent can import the repo,
+  make a plain-language change, show a live preview, and open a pull request
+  (free Starter tier to try; Core is $20/month). One caution: keep GitHub as
+  the home of the site and ignore Replit's own publishing, so the project does
+  not drift onto Replit's hosting.
+- **Cursor** and **Windsurf** (now called Devin Desktop): excellent AI editors
+  (free tiers; Pro $20/month each), and the strongest tools on this list for
+  editing files directly. But they are desktop programs that assume comfort
+  with installing software, cloning a repo, and basic git. Steepest learning
+  curve here; better as a later step than a first one.
+- **github.dev**, no AI at all: on any page of the repo, pressing the period
+  key opens a free browser editor where she can edit a file and commit the
+  change herself. For small fixes (a word, a link, a date), this plus a chat
+  AI for drafting is honestly enough.
+
+The $0 starter kit: Claude Free (or whichever chat AI she already has) for
+drafting, Jules for proposed changes, github.dev for small direct edits. Pay
+only when a limit actually bites.
+
+Tools to avoid for this project: Lovable (by its own documentation it cannot
+connect to an existing repository; it would rebuild the site into its own
+system), v0 (builds in Next.js/React and deploys to Vercel, a different stack
+and host than this site; new paid plans start at $30/month), Bolt.new (similar
+app machinery, metered by tokens, pushes its own hosting), and the consumer
+Microsoft Copilot (no GitHub connection at all; not to be confused with GitHub
+Copilot above).
