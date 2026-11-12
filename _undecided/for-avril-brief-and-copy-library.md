@@ -2,7 +2,8 @@
 
 Prepared November 12, 2026, for Avril Johnnidis, ahead of the first working call.
 Part 1 is the project as it stands. Part 2 is copy Greg has already approved, verbatim,
-with a status label on each piece, so it can be pulled from safely. Part 3 is the design
+with a status label on each piece, so it can be pulled from safely, plus a rates
+reference section holding the official numbers in one place. Part 3 is the design
 dreaming so far. Anything new written for the site goes through Greg before it is used.
 
 ---
@@ -39,7 +40,7 @@ Still open:
 - Design direction: to be dreamed together on the first call.
 - The Coach offering: no approved copy exists yet. Marked [to be written].
 
-## Part 2: Copy library (approved, verbatim)
+## Part 2: Copy library (approved, verbatim) and rates reference
 
 ### Name and titles, settled November 10, 2026
 
@@ -78,7 +79,33 @@ Gregory Alexander is a musician, performing artist, coach, and facilitator in Au
 Public rate line: "Starting at $60/hour. Project and event pricing available upon request."
 Public scheduling line: "Lesson times are arranged individually. Reach out, and we will find a time that works."
 
-Note on rates: the listing copy above carries rates because listings do. Whether any rates appear on the website itself is undecided, and Greg's stated site principle leans against menus, lists, and rates on the site. Flagged here so nobody copies them across by accident.
+### Rates reference (official information, held as reference)
+
+Greg's direction (November 12, 2026): the official rate information lives in this
+section as reference, in case it is ever needed. It is NOT approved website copy.
+Whether rates are mentioned anywhere on the website at all is undecided, and his
+stated site principle leans against menus, lists, and rates on the site.
+
+Teaching studio (private sessions, his home studio in Windsor Park or the student's home):
+
+- 30 minutes: $40
+- 45 minutes: $50
+- 60 minutes: $60
+- Four 60-minute sessions: $200
+- Public rate line: "Starting at $60/hour. Project and event pricing available upon request."
+
+Performances, sessions, and project work (accompanying, recording sessions, music
+direction, ceremony and event work):
+
+- Priced by scope. There is no single published rate, and inquiries are handled case by case: contact for specific rates.
+- The professional range for this kind of work runs up to $200 to $300 an hour depending on the project.
+- Greg's own sense of it (November 12, 2026): for the right project he would be happy to work at around $100 an hour.
+
+Draft language for saying the project range professionally (DRAFT, written for
+Greg's consideration on November 12, 2026; not approved copy):
+
+- Option A, with the range stated: "Project and session work is priced by scope, with rates starting at $100/hour. Please reach out to discuss your project."
+- Option B, no numbers: "For performances, sessions, and projects, pricing depends on the scope of the work. I am glad to talk and find the number that fits."
 
 ### Links
 
