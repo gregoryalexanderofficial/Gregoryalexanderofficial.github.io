@@ -36,7 +36,7 @@ Decided already:
 Still open:
 
 - Avril's GitHub username (blocks the collaborator invite).
-- Contact email: the site's Contact section currently links only to ReverbNation. Whether an email address appears, and which one, is Greg's decision, still open.
+- Contact email: the site's Contact section currently links only to ReverbNation. Whether an email address appears, and which one, is Greg's decision, still open. Related option (checked November 12, 2026): GitHub Pages is static only and has no built-in form handling, but a working contact form is easy via a third-party form backend (Formspree free tier: 50 submissions a month; Web3Forms free tier: 250 a month). Submissions arrive by email, and the address itself never has to appear on the site, which makes a form a real alternative to publishing an email address.
 - Design direction: to be dreamed together on the first call.
 - The Coach offering: no approved copy exists yet. Marked [to be written].
 
