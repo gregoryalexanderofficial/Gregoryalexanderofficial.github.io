@@ -79,12 +79,17 @@ Gregory Alexander is a musician, performing artist, coach, and facilitator in Au
 Public rate line: "Starting at $60/hour. Project and event pricing available upon request."
 Public scheduling line: "Lesson times are arranged individually. Reach out, and we will find a time that works."
 
-### Rates reference (official information, held as reference)
+### Rates reference and philosophy (internal reference, NOT website copy)
 
 Greg's direction (November 12, 2026): the official rate information lives in this
-section as reference, in case it is ever needed. It is NOT approved website copy.
+section as reference, in case it is ever needed. None of it is approved website copy.
 Whether rates are mentioned anywhere on the website at all is undecided, and his
-stated site principle leans against menus, lists, and rates on the site.
+stated site principle leans against menus, lists, and rates on the site. What follows
+is in two parts: the numbers, then the reasoning and philosophy around them, which
+Greg wants held in the project's working materials even where it would never be
+published as copy.
+
+The numbers:
 
 Teaching studio (private sessions, his home studio in Windsor Park or the student's home):
 
@@ -93,19 +98,26 @@ Teaching studio (private sessions, his home studio in Windsor Park or the studen
 - 60 minutes: $60
 - Four 60-minute sessions: $200
 - Public rate line: "Starting at $60/hour. Project and event pricing available upon request."
+- When someone asks his lesson rate, he simply says $60 an hour.
 
 Performances, sessions, and project work (accompanying, recording sessions, music
 direction, ceremony and event work):
 
-- Priced by scope. There is no single published rate, and inquiries are handled case by case: contact for specific rates.
+- Priced by scope. There is no single published rate; inquiries are handled case by case: contact for specific rates.
 - The professional range for this kind of work runs up to $200 to $300 an hour depending on the project.
-- Greg's own sense of it (November 12, 2026): for the right project he would be happy to work at around $100 an hour.
 
-Draft language for saying the project range professionally (DRAFT, written for
-Greg's consideration on November 12, 2026; not approved copy):
+The philosophy (Greg's reasoning, November 12, 2026; internal, never copy):
 
-- Option A, with the range stated: "Project and session work is priced by scope, with rates starting at $100/hour. Please reach out to discuss your project."
-- Option B, no numbers: "For performances, sessions, and projects, pricing depends on the scope of the work. I am glad to talk and find the number that fits."
+- There is a sliding scale aesthetic underneath all of this, even though he does not advertise a sliding scale.
+- The $60 lesson rate already feels like the lower, entry-level end to him, which is why he states it plainly and does not volunteer discounts.
+- Flexibility runs in both directions. If someone genuinely wants to study with him and can only afford something like $40 an hour, he would probably still consider it, because the wanting matters. Nobody is currently asking.
+- At the other end, with someone well off who really wants to work with him, he would almost prefer to charge more than the standard rate. That clientele is not banging down the door yet; the orientation stands anyway.
+- His working sense for project work is that the right project at around $100 an hour would feel good. That is reasoning, not language: he has said explicitly it should not appear as copy.
+
+Draft copy candidates, kept minimal (DRAFT, awaiting Greg's approval):
+
+- For the project range, no numbers: "For performances, sessions, and projects, pricing depends on the scope of the work. I am glad to talk and find the number that fits."
+- A sliding scale signal, if one is ever wanted in copy: "If the standard rate is the barrier, say so. The right fit matters more."
 
 ### Links
 
