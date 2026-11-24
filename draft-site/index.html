@@ -23,8 +23,8 @@
 
   /* ---------- cover ---------- */
   #cover{position:relative;overflow:hidden;}
-  #cover .bg{position:absolute;inset:0;background:url('assets/fence.jpg') center 22%/cover no-repeat;opacity:.5;}
-  #cover .veil{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 42%,rgba(7,11,22,.25),rgba(7,11,22,.93) 78%);}
+  #cover .bg{position:absolute;inset:0;background:url('assets/fence.jpg') center 22%/cover no-repeat;opacity:.85;}
+  #cover .veil{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 42%,rgba(7,11,22,.10),rgba(7,11,22,.78) 80%);}
   #coverStars{position:absolute;inset:0;}
   #cover .inner{position:relative;z-index:3;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:90px 22px 60px;}
   #cover h1{font-size:clamp(30px,5.6vw,54px);font-weight:normal;letter-spacing:.2em;text-transform:uppercase;color:#f4efe2;text-shadow:0 2px 30px rgba(0,0,0,.8);}
@@ -59,7 +59,8 @@
     box-shadow:0 0 0 0 rgba(242,214,140,0),0 18px 50px rgba(0,0,0,.55);}
   #card.open{opacity:1;pointer-events:auto;transform:translate(-50%,-50%) scale(1);
     box-shadow:0 0 90px 14px rgba(242,214,140,.20),0 18px 50px rgba(0,0,0,.55);}
-  #card h3{font-size:19px;font-weight:normal;color:#f2d68c;margin-bottom:8px;padding-right:26px;}
+  #card{cursor:pointer;}
+  #card h3{font-size:19px;font-weight:normal;color:#f2d68c;margin-bottom:8px;padding-right:26px;text-decoration:underline dotted rgba(242,214,140,.65);text-underline-offset:4px;}
   #card p{font-size:14.5px;line-height:1.55;color:#ddd8ca;}
   #card .more{display:inline-block;margin-top:13px;font-size:13.5px;font-style:italic;color:#f2d68c;text-decoration:none;border-bottom:1px dotted rgba(242,214,140,.6);cursor:pointer;background:none;border-top:none;border-left:none;border-right:none;padding:0;}
   #cardClose{position:absolute;top:9px;right:13px;background:none;border:none;color:#98a2b8;font-size:19px;cursor:pointer;}
@@ -88,7 +89,7 @@
   .pageWrap{max-width:820px;margin:0 auto;padding:110px 22px 70px;}
   .pageWrap h2{font-size:clamp(24px,3.6vw,32px);font-weight:normal;color:#f4efe2;letter-spacing:.14em;text-transform:uppercase;margin-bottom:8px;}
   .pageWrap .lede{font-style:italic;color:#c8cfdd;margin-bottom:10px;font-size:16px;}
-  .pageWrap h3{font-weight:normal;font-style:italic;font-size:18px;color:#f2d68c;margin:28px 0 10px;}
+  .pageWrap h3{font-weight:normal;font-size:25px;letter-spacing:.03em;color:#f2d68c;margin:38px 0 12px;}
   .pageWrap h3 a{color:#f2d68c;text-decoration:none;border-bottom:1px dotted rgba(242,214,140,.5);}
   .pageWrap .phr{display:inline-block;margin:0 14px 9px 0;font-size:15.5px;color:#d9d2c0;text-decoration:none;border-bottom:1px dotted rgba(217,210,192,.35);cursor:pointer;background:none;border-top:none;border-left:none;border-right:none;padding:0;}
   .pageWrap .phr:hover{color:#f2d68c;}
@@ -96,6 +97,50 @@
   .pageWrap img.hero{width:100%;max-height:360px;object-fit:cover;border-radius:10px;margin:10px 0 24px;}
   #draftTag{position:fixed;bottom:14px;right:16px;z-index:90;font-size:10.5px;letter-spacing:.16em;color:#79839a;
     border:1px solid rgba(121,131,154,.4);border-radius:999px;padding:5px 10px;background:rgba(16,22,40,.7);}
+
+  /* ---------- light rooms: possibility, crystallized ---------- */
+  #roomView,#everythingView,#aboutView,#basicsView{background:linear-gradient(180deg,#faf2df,#f5e7cb 55%,#efdcba);color:#2e2119;}
+  #roomView .roomWrap h2,#everythingView .pageWrap h2,#aboutView .pageWrap h2,#basicsView .pageWrap h2{color:#33231a;}
+  .roomWrap .kick{color:#a05a2c;}
+  #roomView .roomWrap .sub,#everythingView .pageWrap .lede,#aboutView .pageWrap .lede,#basicsView .pageWrap .lede{color:#71563c;}
+  #roomView .roomWrap p,#roomView .roomWrap li,#everythingView .pageWrap p,#aboutView .pageWrap p,#basicsView .pageWrap p{color:#41321f;}
+  #roomView .roomWrap h4{color:#b3541e;}
+  #roomView .roomWrap img.hero{opacity:1;box-shadow:0 10px 34px rgba(90,55,15,.25);}
+  #everythingView .pageWrap img.hero,#aboutView .pageWrap img.hero,#basicsView .pageWrap img.hero{box-shadow:0 10px 34px rgba(90,55,15,.22);}
+  #roomView .waysIn button{background:rgba(255,252,244,.85);border-color:rgba(122,84,40,.45);color:#5a4028;}
+  #roomView .waysIn button:hover{border-color:#b3541e;color:#b3541e;}
+  #roomView .reach,#everythingView .reach,#aboutView .reach,#basicsView .reach{border-top-color:rgba(122,84,40,.35);}
+  #roomView .reach .big,#everythingView .reach .big,#aboutView .reach .big,#basicsView .reach .big{color:#33231a;}
+  #roomView a,#everythingView a,#aboutView a,#basicsView a{color:#9a4a12;}
+  #roomView .sideways{color:#8a6c4c;} #roomView .sideways a{color:#9a4a12;}
+  #everythingView .pageWrap h3{color:#8a3c0c;} #everythingView .pageWrap h3 a{color:#8a3c0c;border-bottom-color:rgba(154,74,18,.5);}
+  #everythingView .pageWrap .phr{color:#5a4632;border-bottom-color:rgba(122,84,40,.4);}
+  #everythingView .pageWrap .phr:hover{color:#b3541e;}
+  body.lightnav #nav{background:linear-gradient(rgba(250,242,223,.94),rgba(250,242,223,0));}
+  body.lightnav #nav .name{color:#4a3220;}
+  body.lightnav #nav .links a{color:#7a5a38;}
+  body.lightnav #nav .links a:hover{color:#b3541e;}
+  /* ---------- basics ---------- */
+  .hireCards{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:16px;margin:22px 0 8px;}
+  .hireCard{display:block;background:rgba(255,252,244,.9);border:1px solid rgba(122,84,40,.35);border-radius:12px;overflow:hidden;text-decoration:none;box-shadow:0 6px 22px rgba(90,55,15,.13);}
+  .hireCard img{width:100%;height:130px;object-fit:cover;display:block;}
+  .hireCard .hc{padding:13px 16px 15px;}
+  .hireCard h4{font-weight:normal;font-size:19px;color:#8a3c0c;margin-bottom:4px;}
+  .hireCard p{font-size:14.5px;line-height:1.5;color:#5a4632;margin:0;}
+  .hireCard .go{display:inline-block;margin-top:9px;font-style:italic;font-size:13.5px;color:#b3541e;}
+  .albumBox{display:flex;gap:20px;flex-wrap:wrap;align-items:flex-start;background:rgba(255,252,244,.9);border:1px solid rgba(122,84,40,.35);border-radius:12px;padding:18px;margin:14px 0 6px;box-shadow:0 6px 22px rgba(90,55,15,.13);}
+  .albumBox img{width:150px;height:150px;object-fit:cover;border-radius:8px;}
+  .albumBox .tracks{flex:1;min-width:240px;}
+  .albumBox .trk{margin-bottom:12px;}
+  .albumBox .trk .tt{font-size:15.5px;color:#41321f;margin-bottom:4px;}
+  .albumBox audio{width:100%;height:34px;}
+  .companyRow{display:flex;gap:14px;overflow-x:auto;padding:6px 2px 14px;margin:8px 0 4px;}
+  .companyCard{flex:0 0 168px;background:rgba(255,252,244,.9);border:1px solid rgba(122,84,40,.3);border-radius:10px;overflow:hidden;}
+  .companyCard img{width:100%;height:110px;object-fit:cover;display:block;}
+  .companyCard .cn{padding:9px 12px;font-size:14.5px;color:#41321f;}
+  .photoStrip{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:14px 0 6px;}
+  .photoStrip img{width:100%;height:150px;object-fit:cover;border-radius:8px;display:block;}
+  .basicsSec{font-weight:normal;font-size:23px;color:#8a3c0c;margin:36px 0 6px;}
 </style>
 </head>
 <body>
@@ -103,7 +148,7 @@
 <nav id="nav">
   <a class="name" href="#cover">Gregory Alexander</a>
   <div class="links">
-    <a href="#field">The field</a><a href="#everything">Everything</a><a href="#about">About</a><a href="mailto:gregalexanderheartsyou@gmail.com">Contact</a>
+    <a href="#field">The field</a><a href="#basics">The basics</a><a href="#everything">Everything</a><a href="#about">About</a><a href="mailto:gregalexanderheartsyou@gmail.com">Contact</a>
   </div>
 </nav>
 
@@ -116,6 +161,7 @@
     <p class="knownfor">Someone who sits with another person's creative process or creative identity, and helps make it more alive.</p>
     <div class="enter">
       <a class="btn" href="#field">Enter the field</a>
+      <a class="btn plain" href="#basics">The basics, plainly</a>
       <a class="btn plain" href="#everything">Everything, plainly</a>
     </div>
     <div class="where">Austin, Texas</div>
@@ -141,6 +187,45 @@
 
 <!-- ABOUT -->
 <section class="view" id="aboutView"><div class="pageWrap" id="aboutWrap"></div></section>
+
+
+<!-- BASICS -->
+<section class="view" id="basicsView"><div class="pageWrap basicsWrap">
+  <h2>The basics</h2>
+  <p class="lede">The straightforward page: what he does, what it sounds like, and how to hire him.</p>
+  <img class="hero" src="assets/rockwood.jpg" alt="Gregory Alexander live at Rockwood Music Hall">
+  <div class="hireCards">
+    <a class="hireCard" href="#room/study"><img src="assets/piano.jpg" alt=""><div class="hc"><h4>Lessons &amp; coaching</h4><p>Piano, voice, guitar, songwriting. Starting at $60/hour, times arranged individually.</p><span class="go">Ask about lessons →</span></div></a>
+    <a class="hireCard" href="#room/ceremony"><img src="assets/melodica.jpg" alt=""><div class="hc"><h4>Weddings &amp; ceremonies</h4><p>From the aisle song to music-directing the whole day, shaped with couples and planners.</p><span class="go">Plan the music →</span></div></a>
+    <a class="hireCard" href="#room/stage"><img src="assets/barika.jpg" alt=""><div class="hc"><h4>Stages &amp; sessions</h4><p>Performance, accompaniment, music direction, and session playing on your record.</p><span class="go">Check availability →</span></div></a>
+  </div>
+  <h3 class="basicsSec">Hear him: Any Day</h3>
+  <p>Greg Alexander sings the songs of Ryan Fauber. Press play.</p>
+  <div class="albumBox">
+    <img src="assets/album.jpg" alt="Any Day album cover">
+    <div class="tracks">
+      <div class="trk"><div class="tt">Are You With Me</div><audio controls preload="none" src="assets/anyday-are-you-with-me.mp3"></audio></div>
+      <div class="trk"><div class="tt">Heart of the Matter</div><audio controls preload="none" src="assets/anyday-heart-of-the-matter.mp3"></audio></div>
+      <div class="trk"><div class="tt">I'm Letting You Go</div><audio controls preload="none" src="assets/anyday-letting-you-go.mp3"></audio></div>
+    </div>
+  </div>
+  <h3 class="basicsSec">The company he keeps</h3>
+  <div class="companyRow">
+    <div class="companyCard"><img src="assets/mystic.jpg" alt=""><div class="cn">Mystic Revival</div></div>
+    <div class="companyCard"><img src="assets/awakened.jpg" alt=""><div class="cn">Awakened Hearts</div></div>
+    <div class="companyCard"><img src="assets/moveit.jpg" alt=""><div class="cn">The Move It Move It</div></div>
+    <div class="companyCard"><img src="assets/pirate.jpg" alt=""><div class="cn">The Absent-Minded Pirate</div></div>
+    <div class="companyCard"><img src="assets/starseed.jpg" alt=""><div class="cn">Starseed Scouts</div></div>
+    <div class="companyCard"><img src="assets/barika.jpg" alt=""><div class="cn">Barika Ensemble</div></div>
+    <div class="companyCard"><img src="assets/amyband.jpg" alt=""><div class="cn">With Amy Sue Berlin</div></div>
+  </div>
+  <h3 class="basicsSec">From the years</h3>
+  <div class="photoStrip">
+    <img src="assets/gregory.jpg" alt=""><img src="assets/tg.jpg" alt=""><img src="assets/contact.jpg" alt=""><img src="assets/well.jpg" alt=""><img src="assets/img2203.jpg" alt=""><img src="assets/img2302.jpg" alt="">
+  </div>
+  <div class="reach"><p class="big">Reach out, and we will find a time that works.</p><p><a href="mailto:gregalexanderheartsyou@gmail.com">gregalexanderheartsyou@gmail.com</a> · 802-734-6148</p></div>
+  <div class="sideways" style="margin-top:22px;font-style:italic;">Or wander: <a href="#field">the field of possibilities</a> · <a href="#everything">everything, the long way</a></div>
+</div></section>
 
 <!-- MICRO CARD -->
 <div id="card" role="dialog" aria-hidden="true">
@@ -218,36 +303,41 @@ study:{ kick:'Study', title:'Lessons, sessions & coaching', sub:'shaped around t
   + '<h4>The pocket</h4><p>The pocket is a mysterious place. As part of ensemble studies, working together, playing, exploring, listening, we will explore what the heck it is, and what to do with it.</p>'
   + '<h4>Help my kid love music</h4><p>Love of music cannot be made to happen. It can be encouraged: hanging out with a kid, following their lead, holding space for learning, growth, and exploration. If a parent hires him for that, that is the shape the work honestly takes.</p>'
   + '<p>Starting at $60/hour. Lesson times are arranged individually.</p>',
-  ways:['piano lessons','voice lessons','guitar lessons','songwriting','music theory',"what's a pocket?",'I want to learn how to groove','help my kid love music'] },
+  ways:['piano lessons','voice lessons','guitar lessons','songwriting','music theory',"what's a pocket?",'I want to learn how to groove','help my kid love music'], img2:'assets/piano.jpg' },
 ceremony:{ kick:'Ceremonies', title:'Ceremonies & weddings', sub:'music shaped to the day', img:'assets/melodica.jpg',
   body:'<p>I work with couples and wedding planners to create the perfect sonic layer for their special day.</p>'
   + '<p>It is a range, not a list. At one end, improvising something beautiful while the bride walks down the aisle. At the other, being the musical director of the whole wedding: choosing the music, finding the right players, deciding the processional, acting as the organizational musical voice with the couple and the planner.</p>'
   + '<h4>Ways it can look</h4><ul><li>Help curating and music-directing the wedding</li><li>Playing for somebody to sing</li><li>Singing during cocktail hour, or singing the aisle song</li><li>Sound healing at the front, singing bowls during the processional</li></ul>'
   + '<p>He also co-creates Austin\u2019s quarterly Community Singing Rituals, and plays music for memorials and gatherings where the room itself is the occasion.</p>',
-  ways:['music for our wedding','shape the whole sonic layer of the day','our first dance','walk down the aisle','a singing ritual','music for a memorial','a sound bath','help curating the music'] },
+  ways:['music for our wedding','shape the whole sonic layer of the day','our first dance','walk down the aisle','a singing ritual','music for a memorial','a sound bath','help curating the music'], img2:'assets/island.jpg' },
 stage:{ kick:'Stage & screen', title:'Stage & screen work', sub:'accompaniment, music direction, coaching', img:'assets/gregory.jpg',
   body:'<p>He accompanies dancers and storytellers with live improvised music, and is currently music-directing Sarah Bentley\u2019s Impermanence album project. His play spans theater, dance, ceremony, and performance art.</p>'
   + '<p>He has performed at some of Austin\u2019s premiere venues including the Continental Club, Antone\u2019s and Cactus Cafe, and has played in folk festivals from Colorado to Connecticut.</p>'
   + '<h4>Audition coaching</h4><p>He also coaches acting and audition preparation, including musical theater: the song, the cut, the room, and how to walk into it as yourself.</p>',
-  ways:['accompanist needed','music for my dance piece','a music director for our show','audition coaching','music for film','play for somebody to sing','music for my theater piece','live music for our production'] },
+  ways:['accompanist needed','music for my dance piece','a music director for our show','audition coaching','music for film','play for somebody to sing','music for my theater piece','live music for our production'], img2:'assets/rockwood.jpg' },
 create:{ kick:'Create', title:'Make something together', sub:'commissions, devising, collaboration', img:'assets/well.jpg',
   body:'<p>Gregory Alexander is a creative facilitator, interdisciplinary artist, and devotee of the improvised moment. Commissions are an engine of his work: a theme, an occasion, a deadline, and something new exists that did not before.</p>'
   + '<p>Work spans music and theater, ensemble leadership, improvisation, recording, and community arts, with an emphasis on helping people explore confidence, creativity, collaboration, and authentic artistic expression.</p>'
   + '<p>If you are making something and it needs ears, a deviser, or a composer in the room, the way in is a conversation.</p>',
-  ways:['commission something','devising together','my band needs ears','an installation','a piece for our ensemble','write something for us','build a piece together','score our project'] },
+  ways:['commission something','devising together','my band needs ears','an installation','a piece for our ensemble','write something for us','build a piece together','score our project'], img2:'assets/barika.jpg' },
 coach:{ kick:'Coaching', title:'Coaching', sub:'a creativity practice, witnessed and supported', img:'assets/piano.jpg',
   body:'<p>Someone who sits with another person\u2019s creative process or creative identity and helps make it more alive and supports them. That sentence covers the lessons, the ceremonial work, and this: coaching for artists and makers in any medium, with music and sound at the center.</p>'
   + '<p>It is the work of a creativity professional: art, writing, general creative practice, and the life around the work, including the presence-based and spiritual edges of it, as they arise.</p>',
-  ways:['creativity coaching','sit with my creative process','unblock the work','grow as an artist','support my practice','sit with my creative identity','help my work come alive','a witness for my process'] },
+  ways:['creativity coaching','sit with my creative process','unblock the work','grow as an artist','support my practice','sit with my creative identity','help my work come alive','a witness for my process'], img2:'assets/contact.jpg' },
 listen:{ kick:'Witness', title:'Listen & watch', sub:'the work, as it exists so far', img:'assets/album.jpg',
   body:'<p>A singer and multi-instrumentalist described as a "deeply gifted vocalist" and "magician." Recordings, videos, and live sets live here, and the shelf grows.</p>'
   + '<p>He recorded an album, "Any Day: Greg Alexander sings the songs of Ryan Fauber," released on the Burlington-based label Jenke Records. He performs "The Absent-Minded Pirate," written by Billy Lucas. He plays with Sparrowji, Mystic Revival, and Awakened Hearts, and co-leads the song circles of Home Street Music.</p>'
+  + '<h4>Any Day: three tracks, press play</h4><div class="albumBox"><img src="assets/album.jpg" alt="Any Day album cover"><div class="tracks">'
+  + '<div class="trk"><div class="tt">Are You With Me</div><audio controls preload="none" src="assets/anyday-are-you-with-me.mp3"></audio></div>'
+  + '<div class="trk"><div class="tt">Heart of the Matter</div><audio controls preload="none" src="assets/anyday-heart-of-the-matter.mp3"></audio></div>'
+  + '<div class="trk"><div class="tt">I\'m Letting You Go</div><audio controls preload="none" src="assets/anyday-letting-you-go.mp3"></audio></div>'
+  + '</div></div>'
   + '<p><a href="https://www.reverbnation.com/gregoryalexanderofficial" target="_blank" rel="noopener">Listen on ReverbNation</a></p>',
-  ways:['hear him play','watch him perform','recordings','live sets','I used to play','watch him play','hear him sing','see him live'] },
+  ways:['hear him play','watch him perform','recordings','live sets','I used to play','watch him play','hear him sing','see him live'], img2:'assets/well.jpg' },
 studio:{ kick:'Studio work', title:'In the studio', sub:'session work: his playing and singing, on your record', img:'assets/piano.jpg',
   body:'<p>Studio work, here, means session work: Gregory is hireable to come in and record on your album: vocals, guitar, piano, and synth.</p>'
   + '<p>He performs on guitar, piano, harmonica, flute and melodica, and writes songs about life, love and the natural world. If your track needs a voice or an instrument played by someone listening as much as playing, that is the offer.</p>',
-  ways:['in the studio','sing on your record','play on your album','play keys on your album','vocals for your track','guitar for your session','synth on your record','a singer for your session'] }
+  ways:['in the studio','sing on your record','play on your album','play keys on your album','vocals for your track','guitar for your session','synth on your record','a singer for your session'], img2:'assets/tg.jpg' }
 };
 
 /* ================= FIELD ENGINE (the Lens) ================= */
@@ -303,13 +393,24 @@ function layout(){
   fieldReady = true;
 }
 var dust = document.getElementById('dust'), dctx = dust.getContext('2d');
+var stars = [];
 function drawDust(){
   dust.width = W; dust.height = H;
-  var drnd = mulberry32(777); dctx.clearRect(0,0,W,H);
-  for(var i=0;i<240;i++){
+  stars = [];
+  var drnd = mulberry32(777);
+  for(var i=0;i<260;i++){
     var sr = drnd();
-    dctx.globalAlpha = drnd()*0.32 + 0.05; dctx.fillStyle = '#cfd6e4';
-    dctx.beginPath(); dctx.arc(drnd()*W, drnd()*H, sr < 0.12 ? (drnd()*1.1 + 0.5) : (drnd()*0.55 + 0.15), 0, 7); dctx.fill();
+    stars.push({ x: drnd()*W, y: drnd()*H, r: sr < 0.12 ? (drnd()*1.2 + 0.6) : (drnd()*0.55 + 0.15),
+      a: drnd()*0.30 + 0.06, ph: drnd()*6.28, sp: drnd()*1.4 + 0.3, amp: drnd()*0.22 + 0.05 });
+  }
+}
+function tickDust(t){
+  if(!stars.length) return;
+  dctx.clearRect(0,0,W,H); dctx.fillStyle = '#dfe6f4';
+  for(var i=0;i<stars.length;i++){
+    var s = stars[i];
+    dctx.globalAlpha = Math.max(0.02, s.a + Math.sin(t*0.001*s.sp + s.ph)*s.amp);
+    dctx.beginPath(); dctx.arc(s.x, s.y, s.r, 0, 7); dctx.fill();
   }
   dctx.globalAlpha = 1;
 }
@@ -320,6 +421,7 @@ document.addEventListener('mouseleave', function(){ pointerOn = false; });
 var RADIUS = 165;
 function frame(){
   if(fieldReady && document.getElementById('fieldView').classList.contains('on')){
+    tickDust(performance.now());
     var best = null, bestD = Infinity, i, it, dx, dy, d;
     if(pointerOn){
       for(i=0;i<instances.length;i++){
@@ -362,11 +464,12 @@ function openCard(p){
   cardRoom = p.c;
   document.getElementById('cardTitle').textContent = p.t;
   document.getElementById('cardBody').textContent = BLURBS[p.t] || FALLBACK[p.c];
-  document.getElementById('cardMore').textContent = 'For more on how we can work together on this → ' + ROOMNAMES[p.c];
+  document.getElementById('cardMore').textContent = 'Step into the room → ' + ROOMNAMES[p.c];
   card.classList.add('open'); card.setAttribute('aria-hidden','false');
 }
 function closeCard(){ card.classList.remove('open'); card.setAttribute('aria-hidden','true'); }
 document.getElementById('cardClose').addEventListener('click', closeCard);
+card.addEventListener('click', function(e){ if(e.target.id === 'cardClose') return; closeCard(); location.hash = '#room/' + cardRoom; });
 document.getElementById('cardMore').addEventListener('click', function(){ closeCard(); location.hash = '#room/' + cardRoom; });
 document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeCard(); });
 
@@ -381,7 +484,7 @@ function renderRoom(id){
   var side = SIDEWAYS.filter(function(s){ return s[0] !== id; }).map(function(s){ return '<a href="#room/' + s[0] + '">' + s[1] + '</a>'; }).join(' · ');
   document.getElementById('roomWrap').innerHTML =
     '<div class="kick">' + r.kick + '</div><h2>' + r.title + '</h2><div class="sub">' + r.sub + '</div>'
-    + '<img class="hero" src="' + r.img + '" alt="">' + r.body
+    + '<img class="hero" src="' + r.img + '" alt="">' + r.body + (r.img2 ? '<img class="hero" src="' + r.img2 + '" alt="">' : '')
     + '<h4>Phrases that live here</h4><div class="waysIn">' + ways + '</div>'
     + REACH + '<div class="sideways">Sideways: ' + side + ' · <a href="#field">back to the field</a> · <a href="#everything">everything</a></div>';
   Array.prototype.forEach.call(document.querySelectorAll('#roomWrap .waysIn button'), function(b){
@@ -419,12 +522,13 @@ function renderAbout(){
 }
 
 /* ================= ROUTING ================= */
-var VIEWS = { cover:'cover', field:'fieldView', everything:'everythingView', about:'aboutView', room:'roomView' };
+var VIEWS = { cover:'cover', field:'fieldView', basics:'basicsView', everything:'everythingView', about:'aboutView', room:'roomView' };
 function route(){
   var h = (location.hash || '#cover').slice(1);
   var parts = h.split('/'), name = parts[0] || 'cover';
   if(!VIEWS[name]) name = 'cover';
   Object.keys(VIEWS).forEach(function(k){ document.getElementById(VIEWS[k]).classList.toggle('on', k === name); });
+  document.body.classList.toggle('lightnav', ['room','everything','about','basics'].indexOf(name) >= 0);
   closeCard();
   if(name === 'room') renderRoom(parts[1] || 'study');
   if(name === 'field'){ layout(); }
