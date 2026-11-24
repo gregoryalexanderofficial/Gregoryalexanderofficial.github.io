@@ -255,7 +255,7 @@ P.forEach(function(p){
     el.type = 'button'; el.className = 'phrase'; el.textContent = p.t;
     field.appendChild(el);
     var it = { p:p, el:el, x:0, y:0, z:0.9 + rnd()*0.2, f:0, lit:false, lastB:-1 };
-    el.addEventListener('click', function(){ if(it.f > 0.35 || it === winner) openCard(p); else { px = it.x; py = it.y; pointerOn = true; } });
+    el.addEventListener('click', function(){ openCard(p); });
     instances.push(it);
   }
 });
