@@ -167,14 +167,14 @@ var P = [
   {t:'a singing ritual', c:'ceremony'},{t:'music for a memorial', c:'ceremony'},
   {t:'a sound bath', c:'ceremony'},{t:'help curating the music', c:'ceremony'},
   {t:'accompanist needed', c:'stage'},{t:'music for my dance piece', c:'stage'},
-  {t:'a music director for our show', c:'stage', e:1},{t:'audition coaching', c:'stage', e:1},{t:'music for film', c:'stage'},
+  {t:'a music director for our show', c:'stage', e:1},{t:'audition coaching', c:'stage', e:1},{t:'music for film', c:'stage'},{t:'play for somebody to sing', c:'stage'},{t:'music for my theater piece', c:'stage'},{t:'live music for our production', c:'stage'},
   {t:'commission something', c:'create'},{t:'devising together', c:'create'},
-  {t:'my band needs ears', c:'create'},{t:'an installation', c:'create'},
+  {t:'my band needs ears', c:'create'},{t:'an installation', c:'create'},{t:'a piece for our ensemble', c:'create'},{t:'write something for us', c:'create'},{t:'build a piece together', c:'create'},{t:'score our project', c:'create'},
   {t:'creativity coaching', c:'coach', e:1},{t:'sit with my creative process', c:'coach'},
-  {t:'unblock the work', c:'coach'},{t:'grow as an artist', c:'coach'},
+  {t:'unblock the work', c:'coach'},{t:'grow as an artist', c:'coach'},{t:'support my practice', c:'coach'},{t:'sit with my creative identity', c:'coach'},{t:'help my work come alive', c:'coach'},{t:'a witness for my process', c:'coach'},
   {t:'hear him play', c:'listen'},{t:'watch him perform', c:'listen'},
-  {t:'recordings', c:'listen'},{t:'live sets', c:'listen'},{t:'I used to play', c:'listen'},
-  {t:'in the studio', c:'studio'},{t:'record a demo', c:'studio'}
+  {t:'recordings', c:'listen'},{t:'live sets', c:'listen'},{t:'I used to play', c:'listen'},{t:'watch him play', c:'listen'},{t:'hear him sing', c:'listen'},{t:'see him live', c:'listen'},
+  {t:'in the studio', c:'studio'},{t:'record a demo', c:'studio'},{t:'lay down a demo', c:'studio'},{t:'record my songs', c:'studio'},{t:'craft the sound I want', c:'studio'},{t:'track a record', c:'studio'},{t:'a demo that sounds like me', c:'studio'},{t:'record my band', c:'studio'}
 ];
 var ROOMNAMES = { study:'Study — lessons, sessions & coaching', ceremony:'Ceremonies & weddings', stage:'Stage & screen', create:'Make something together', coach:'Coaching', listen:'Listen & watch', studio:'In the studio' };
 var FALLBACK = {
@@ -226,25 +226,25 @@ stage:{ kick:'Stage & screen', title:'Stage & screen work', sub:'accompaniment, 
   body:'<p>He accompanies dancers and storytellers with live improvised music, and is currently music-directing Sarah Bentley\u2019s Impermanence album project. His play spans theater, dance, ceremony, and performance art.</p>'
   + '<p>He has performed at some of Austin\u2019s premiere venues including the Continental Club, Antone\u2019s and Cactus Cafe, and has played in folk festivals from Colorado to Connecticut.</p>'
   + '<h4>Audition coaching</h4><p>He also coaches acting and audition preparation, including musical theater: the song, the cut, the room, and how to walk into it as yourself.</p>',
-  ways:['accompanist needed','music for my dance piece','a music director for our show','audition coaching','music for film'] },
+  ways:['accompanist needed','music for my dance piece','a music director for our show','audition coaching','music for film','play for somebody to sing','music for my theater piece','live music for our production'] },
 create:{ kick:'Create', title:'Make something together', sub:'commissions, devising, collaboration', img:'assets/well.jpg',
   body:'<p>Gregory Alexander is a creative facilitator, interdisciplinary artist, and devotee of the improvised moment. Commissions are an engine of his work: a theme, an occasion, a deadline, and something new exists that did not before.</p>'
   + '<p>Work spans music and theater, ensemble leadership, improvisation, recording, and community arts, with an emphasis on helping people explore confidence, creativity, collaboration, and authentic artistic expression.</p>'
   + '<p>If you are making something and it needs ears, a deviser, or a composer in the room, the way in is a conversation.</p>',
-  ways:['commission something','devising together','my band needs ears','an installation'] },
+  ways:['commission something','devising together','my band needs ears','an installation','a piece for our ensemble','write something for us','build a piece together','score our project'] },
 coach:{ kick:'Coaching', title:'Coaching', sub:'a creativity practice, witnessed and supported', img:'assets/piano.jpg',
   body:'<p>Someone who sits with another person\u2019s creative process or creative identity and helps make it more alive and supports them. That sentence covers the lessons, the ceremonial work, and this: coaching for artists and makers in any medium, with music and sound at the center.</p>'
   + '<p>It is the work of a creativity professional: art, writing, general creative practice, and the life around the work, including the presence-based and spiritual edges of it, as they arise.</p>',
-  ways:['creativity coaching','sit with my creative process','unblock the work','grow as an artist'] },
+  ways:['creativity coaching','sit with my creative process','unblock the work','grow as an artist','support my practice','sit with my creative identity','help my work come alive','a witness for my process'] },
 listen:{ kick:'Witness', title:'Listen & watch', sub:'the work, as it exists so far', img:'assets/album.jpg',
   body:'<p>A singer and multi-instrumentalist described as a "deeply gifted vocalist" and "magician." Recordings, videos, and live sets live here, and the shelf grows.</p>'
   + '<p>He recorded an album, "Any Day: Greg Alexander sings the songs of Ryan Fauber," released on the Burlington-based label Jenke Records. He performs "The Absent-Minded Pirate," written by Billy Lucas. He plays with Sparrowji, Mystic Revival, and Awakened Hearts, and co-leads the song circles of Home Street Music.</p>'
   + '<p><a href="https://www.reverbnation.com/gregoryalexanderofficial" target="_blank" rel="noopener">Listen on ReverbNation</a></p>',
-  ways:['hear him play','watch him perform','recordings','live sets','I used to play'] },
+  ways:['hear him play','watch him perform','recordings','live sets','I used to play','watch him play','hear him sing','see him live'] },
 studio:{ kick:'Studio', title:'In the studio', sub:'record where the clock is not cold', img:'assets/piano.jpg',
   body:'<p>Located in central Austin, Gregory Alexander\u2019s home studio is a great place to record acoustic music. His professional gear includes a Neumann u87 microphone and a soundproof room. Whether you have a project in mind or just want to lay down a demo, he can help you craft the sound you want.</p>'
   + '<p>"I aim for it to be a space where artists can embrace the truth of their work without feeling the pressure of the ticking clock and the coldness of commercial recording environments."</p>',
-  ways:['in the studio','record a demo'] }
+  ways:['in the studio','record a demo','lay down a demo','record my songs','craft the sound I want','track a record','a demo that sounds like me','record my band'] }
 };
 
 /* ================= FIELD ENGINE (the Lens) ================= */
