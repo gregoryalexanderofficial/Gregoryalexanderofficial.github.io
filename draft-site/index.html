@@ -165,6 +165,7 @@ var P = [
   {t:'music for our wedding', c:'ceremony', e:1},{t:'shape the whole sonic layer of the day', c:'ceremony'},
   {t:'our first dance', c:'ceremony'},{t:'walk down the aisle', c:'ceremony'},
   {t:'a singing ritual', c:'ceremony'},{t:'music for a memorial', c:'ceremony'},
+  {t:'a sound bath', c:'ceremony'},{t:'help curating the music', c:'ceremony'},
   {t:'accompanist needed', c:'stage'},{t:'music for my dance piece', c:'stage'},
   {t:'a music director for our show', c:'stage', e:1},{t:'audition coaching', c:'stage', e:1},{t:'music for film', c:'stage'},
   {t:'commission something', c:'create'},{t:'devising together', c:'create'},
@@ -200,7 +201,8 @@ var BLURBS = {
   'a music director for our show':'Music direction for theater and performance: ensemble leadership, live musicians, and the sound of the whole production, held together.',
   'accompanist needed':'He accompanies dancers and storytellers with live improvised music, and singers at the piano. Accompaniment is listening, played.',
   'creativity coaching':'Someone who sits with another person\u2019s creative process or creative identity and helps make it more alive and supports them. That is the coaching, whatever the medium.',
-  'in the studio':'A home studio in central Austin: a soundproof room, a Neumann u87, and time that does not feel like a ticking clock.'
+  'in the studio':'A home studio in central Austin: a soundproof room, a Neumann u87, and time that does not feel like a ticking clock.',
+  'a sound bath':'Sound healing at the front of the room: singing bowls, voice, and quiet instruments, holding the space while it happens.'
 };
 
 /* ================= ROOMS ================= */
@@ -219,7 +221,7 @@ ceremony:{ kick:'Ceremonies', title:'Ceremonies & weddings', sub:'music shaped t
   + '<p>It is a range, not a list. At one end, improvising something beautiful while the bride walks down the aisle. At the other, being the musical director of the whole wedding: choosing the music, finding the right players, deciding the processional, acting as the organizational musical voice with the couple and the planner.</p>'
   + '<h4>Ways it can look</h4><ul><li>Help curating and music-directing the wedding</li><li>Playing for somebody to sing</li><li>Singing during cocktail hour, or singing the aisle song</li><li>Sound healing at the front, singing bowls during the processional</li></ul>'
   + '<p>He also co-creates Austin\u2019s quarterly Community Singing Rituals, and plays music for memorials and gatherings where the room itself is the occasion.</p>',
-  ways:['music for our wedding','shape the whole sonic layer of the day','our first dance','walk down the aisle','a singing ritual','music for a memorial'] },
+  ways:['music for our wedding','shape the whole sonic layer of the day','our first dance','walk down the aisle','a singing ritual','music for a memorial','a sound bath','help curating the music'] },
 stage:{ kick:'Stage & screen', title:'Stage & screen work', sub:'accompaniment, music direction, coaching', img:'assets/gregory.jpg',
   body:'<p>He accompanies dancers and storytellers with live improvised music, and is currently music-directing Sarah Bentley\u2019s Impermanence album project. His play spans theater, dance, ceremony, and performance art.</p>'
   + '<p>He has performed at some of Austin\u2019s premiere venues including the Continental Club, Antone\u2019s and Cactus Cafe, and has played in folk festivals from Colorado to Connecticut.</p>'
@@ -272,15 +274,21 @@ function layout(){
   var fv = document.getElementById('fieldView');
   W = fv.clientWidth; H = fv.clientHeight;
   baseFS = Math.max(10.5, Math.min(13.5, W/95));
-  var order = instances.slice();
-  for(var i=order.length-1;i>0;i--){ var j = Math.floor(rnd()*(i+1)); var tmp = order[i]; order[i] = order[j]; order[j] = tmp; }
-  var cols = Math.max(4, Math.round(W/168));
-  var rows = Math.ceil(order.length/cols);
-  var cellW = W/cols, cellH = Math.min(48, H/Math.max(rows,1));
-  order.forEach(function(it, idx){
-    var cx = idx % cols, cy = Math.floor(idx/cols);
-    it.x = (cx + 0.5)*cellW + (rnd()-0.5)*cellW*0.62;
-    it.y = 90 + cy*cellH + (rnd()-0.5)*cellH*0.55;
+  var anchorPos = {};
+  ANCHORS.forEach(function(a){ anchorPos[a.t.toLowerCase()] = { x: a.x/100*W, y: a.y/100*H }; });
+  var homeOf = { study:'study', ceremony:'ceremony', stage:'stage', create:'create', coach:'coaching', listen:'listen', studio:'studio' };
+  function gauss(){ return (rnd() + rnd() + rnd() - 1.5) / 1.5; }
+  instances.forEach(function(it){
+    var home = anchorPos[homeOf[it.p.c]];
+    if(home && rnd() < 0.72){
+      it.x = home.x + gauss()*W*0.16;
+      it.y = home.y + gauss()*H*0.13;
+    } else {
+      it.x = 30 + rnd()*(W - 60);
+      it.y = 100 + rnd()*(H - 130);
+    }
+    it.x = Math.max(24, Math.min(W - 24, it.x));
+    it.y = Math.max(84, Math.min(H - 16, it.y));
     it.el.style.fontSize = (baseFS*it.z*1.0) + 'px';
     it.el.style.left = it.x + 'px'; it.el.style.top = it.y + 'px';
   });
