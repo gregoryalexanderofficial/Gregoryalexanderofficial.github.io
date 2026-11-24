@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gregory Alexander — musician · interdisciplinary artist · teaching artist · coach · facilitator</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{min-height:100%;}
+  body{background:#070b16;color:#e8e4d8;font-family:Georgia,'Times New Roman',serif;-webkit-font-smoothing:antialiased;}
+  a{color:#f2d68c;}
+  button{font-family:inherit;}
+
+  /* ---------- persistent quiet nav ---------- */
+  #nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;
+    padding:13px 20px;background:linear-gradient(rgba(7,11,22,.88),rgba(7,11,22,0));}
+  #nav .name{letter-spacing:.22em;text-transform:uppercase;font-size:13px;color:#ece7d9;text-decoration:none;}
+  #nav .links a{margin-left:18px;font-size:13.5px;font-style:italic;color:#b9c0d0;text-decoration:none;}
+  #nav .links a:hover{color:#f2d68c;}
+
+  .view{display:none;min-height:100vh;}
+  .view.on{display:block;}
+
+  /* ---------- cover ---------- */
+  #cover{position:relative;overflow:hidden;}
+  #cover .bg{position:absolute;inset:0;background:url('assets/fence.jpg') center 22%/cover no-repeat;opacity:.5;}
+  #cover .veil{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 42%,rgba(7,11,22,.25),rgba(7,11,22,.93) 78%);}
+  #coverStars{position:absolute;inset:0;}
+  #cover .inner{position:relative;z-index:3;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:90px 22px 60px;}
+  #cover h1{font-size:clamp(30px,5.6vw,54px);font-weight:normal;letter-spacing:.2em;text-transform:uppercase;color:#f4efe2;text-shadow:0 2px 30px rgba(0,0,0,.8);}
+  #cover .titles{margin-top:12px;font-size:clamp(13px,1.8vw,16.5px);letter-spacing:.12em;color:#c8cfdd;}
+  #cover .knownfor{margin-top:30px;max-width:620px;font-style:italic;font-size:clamp(16.5px,2.3vw,20.5px);line-height:1.55;color:#e8e2cf;}
+  #cover .enter{margin-top:42px;display:flex;gap:14px;flex-wrap:wrap;justify-content:center;}
+  .btn{display:inline-block;padding:12px 26px;border:1px solid rgba(242,214,140,.65);border-radius:999px;color:#f2d68c;
+    text-decoration:none;font-size:15.5px;letter-spacing:.04em;background:rgba(10,14,26,.55);cursor:pointer;}
+  .btn:hover{background:rgba(242,214,140,.14);}
+  .btn.plain{border-color:rgba(185,192,208,.4);color:#b9c0d0;}
+  #cover .where{margin-top:36px;font-size:13px;letter-spacing:.18em;color:#8b94a9;text-transform:uppercase;}
+
+  /* ---------- field ---------- */
+  #fieldView{position:relative;overflow:hidden;background:#070b16;}
+  #dust{position:absolute;inset:0;z-index:0;}
+  #field{position:absolute;inset:0;z-index:2;cursor:crosshair;}
+  .phrase{position:absolute;transform:translate(-50%,-50%);white-space:nowrap;color:#aab4c8;background:none;border:none;
+    font-family:inherit;cursor:pointer;padding:2px 4px;will-change:transform,opacity;user-select:none;-webkit-user-select:none;}
+  .anchorWord{position:absolute;transform:translate(-50%,-50%);z-index:1;color:rgba(216,222,235,.13);letter-spacing:.3em;
+    text-transform:uppercase;white-space:nowrap;pointer-events:none;user-select:none;}
+  #fieldHead{position:absolute;top:64px;left:0;right:0;z-index:5;text-align:center;pointer-events:none;}
+  #fieldHead h2{font-size:clamp(17px,2.4vw,24px);font-weight:normal;letter-spacing:.22em;text-transform:uppercase;color:#ece7d9;
+    text-shadow:0 0 22px rgba(7,11,22,.95);}
+  #fieldHead p{margin-top:5px;font-style:italic;font-size:clamp(12px,1.5vw,14.5px);color:#98a2b8;text-shadow:0 0 14px rgba(7,11,22,.95);}
+  #fieldHint{position:absolute;left:0;right:0;bottom:16px;z-index:5;text-align:center;font-style:italic;
+    font-size:clamp(11.5px,1.4vw,13.5px);color:#79839a;pointer-events:none;text-shadow:0 0 12px rgba(7,11,22,.95);}
+
+  /* ---------- micro card ---------- */
+  #card{position:fixed;left:50%;bottom:26px;transform:translate(-50%,18px);width:min(480px,calc(100vw - 32px));
+    background:rgba(13,18,34,.97);border:1px solid rgba(242,214,140,.45);border-radius:14px;padding:20px 22px 16px;z-index:80;
+    opacity:0;pointer-events:none;transition:opacity .25s ease,transform .25s ease;box-shadow:0 18px 50px rgba(0,0,0,.55);}
+  #card.open{opacity:1;pointer-events:auto;transform:translate(-50%,0);}
+  #card h3{font-size:19px;font-weight:normal;color:#f2d68c;margin-bottom:8px;padding-right:26px;}
+  #card p{font-size:14.5px;line-height:1.55;color:#ddd8ca;}
+  #card .more{display:inline-block;margin-top:13px;font-size:13.5px;font-style:italic;color:#f2d68c;text-decoration:none;border-bottom:1px dotted rgba(242,214,140,.6);cursor:pointer;background:none;border-top:none;border-left:none;border-right:none;padding:0;}
+  #cardClose{position:absolute;top:9px;right:13px;background:none;border:none;color:#98a2b8;font-size:19px;cursor:pointer;}
+
+  /* ---------- rooms ---------- */
+  .roomWrap{max-width:760px;margin:0 auto;padding:110px 22px 70px;}
+  .roomWrap .kick{font-size:12px;letter-spacing:.26em;text-transform:uppercase;color:#98a2b8;}
+  .roomWrap h2{font-size:clamp(26px,4vw,36px);font-weight:normal;color:#f4efe2;margin:10px 0 6px;}
+  .roomWrap .sub{font-style:italic;color:#c8cfdd;font-size:16.5px;margin-bottom:22px;}
+  .roomWrap img.hero{width:100%;max-height:340px;object-fit:cover;border-radius:10px;margin:8px 0 26px;opacity:.92;}
+  .roomWrap p{font-size:16.5px;line-height:1.68;color:#ddd8ca;margin-bottom:16px;}
+  .roomWrap h4{font-weight:normal;font-style:italic;color:#f2d68c;font-size:17.5px;margin:26px 0 8px;}
+  .roomWrap ul{margin:0 0 16px 20px;}
+  .roomWrap li{font-size:16px;line-height:1.6;color:#ddd8ca;margin-bottom:5px;}
+  .waysIn{display:flex;flex-wrap:wrap;gap:9px;margin:6px 0 20px;}
+  .waysIn button{background:rgba(16,22,40,.85);border:1px solid rgba(217,210,192,.3);border-radius:999px;color:#d9d2c0;
+    font-size:13.5px;padding:6px 14px;cursor:pointer;}
+  .waysIn button:hover{border-color:rgba(242,214,140,.8);color:#f2d68c;}
+  .reach{margin-top:34px;border-top:1px solid rgba(217,210,192,.22);padding-top:20px;}
+  .reach p{font-size:15.5px;}
+  .reach .big{font-size:17.5px;color:#f4efe2;}
+  .sideways{margin-top:26px;font-style:italic;font-size:14.5px;color:#98a2b8;}
+  .sideways a{color:#b9c0d0;}
+
+  /* ---------- everything / about ---------- */
+  .pageWrap{max-width:820px;margin:0 auto;padding:110px 22px 70px;}
+  .pageWrap h2{font-size:clamp(24px,3.6vw,32px);font-weight:normal;color:#f4efe2;letter-spacing:.14em;text-transform:uppercase;margin-bottom:8px;}
+  .pageWrap .lede{font-style:italic;color:#c8cfdd;margin-bottom:10px;font-size:16px;}
+  .pageWrap h3{font-weight:normal;font-style:italic;font-size:18px;color:#f2d68c;margin:28px 0 10px;}
+  .pageWrap h3 a{color:#f2d68c;text-decoration:none;border-bottom:1px dotted rgba(242,214,140,.5);}
+  .pageWrap .phr{display:inline-block;margin:0 14px 9px 0;font-size:15.5px;color:#d9d2c0;text-decoration:none;border-bottom:1px dotted rgba(217,210,192,.35);cursor:pointer;background:none;border-top:none;border-left:none;border-right:none;padding:0;}
+  .pageWrap .phr:hover{color:#f2d68c;}
+  .pageWrap p{font-size:16.5px;line-height:1.68;color:#ddd8ca;margin-bottom:16px;}
+  .pageWrap img.hero{width:100%;max-height:360px;object-fit:cover;border-radius:10px;margin:10px 0 24px;}
+  #draftTag{position:fixed;bottom:14px;right:16px;z-index:90;font-size:10.5px;letter-spacing:.16em;color:#79839a;
+    border:1px solid rgba(121,131,154,.4);border-radius:999px;padding:5px 10px;background:rgba(16,22,40,.7);}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a class="name" href="#cover">Gregory Alexander</a>
+  <div class="links">
+    <a href="#field">The field</a><a href="#everything">Everything</a><a href="#about">About</a><a href="mailto:gregalexanderheartsyou@gmail.com">Contact</a>
+  </div>
+</nav>
+
+<!-- COVER -->
+<section class="view" id="cover">
+  <div class="bg"></div><canvas id="coverStars"></canvas><div class="veil"></div>
+  <div class="inner">
+    <h1>Gregory Alexander</h1>
+    <div class="titles">Musician · Interdisciplinary Artist · Teaching Artist · Coach · Facilitator</div>
+    <p class="knownfor">Someone who sits with another person's creative process or creative identity, and helps make it more alive.</p>
+    <div class="enter">
+      <a class="btn" href="#field">Enter the field</a>
+      <a class="btn plain" href="#everything">Everything, plainly</a>
+    </div>
+    <div class="where">Austin, Texas</div>
+  </div>
+</section>
+
+<!-- FIELD -->
+<section class="view" id="fieldView">
+  <canvas id="dust"></canvas>
+  <div id="field"></div>
+  <div id="fieldHead">
+    <h2>The Field of Possibilities</h2>
+    <p>every way in is a way of working together</p>
+  </div>
+  <div id="fieldHint">run your cursor slowly across the field. what is yours will surface.</div>
+</section>
+
+<!-- ROOM (filled by script) -->
+<section class="view" id="roomView"><div class="roomWrap" id="roomWrap"></div></section>
+
+<!-- EVERYTHING -->
+<section class="view" id="everythingView"><div class="pageWrap" id="everythingWrap"></div></section>
+
+<!-- ABOUT -->
+<section class="view" id="aboutView"><div class="pageWrap" id="aboutWrap"></div></section>
+
+<!-- MICRO CARD -->
+<div id="card" role="dialog" aria-hidden="true">
+  <button id="cardClose" type="button" aria-label="Close">×</button>
+  <h3 id="cardTitle"></h3>
+  <p id="cardBody"></p>
+  <button class="more" id="cardMore" type="button"></button>
+</div>
+
+<div id="draftTag">DRAFT — FOR GREG &amp; AVRIL</div>
+
+<script>
+'use strict';
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+var rnd = mulberry32(20261124);
+
+/* ================= FIELD DATA — interfaces only ================= */
+var P = [
+  {t:'piano lessons', c:'study', e:1},{t:'voice lessons', c:'study'},{t:'guitar lessons', c:'study'},
+  {t:'songwriting', c:'study'},{t:'composition', c:'study'},{t:'music theory', c:'study'},
+  {t:'ear training', c:'study'},{t:'improvisation', c:'study'},{t:"what's a pocket?", c:'study'},
+  {t:'I want to learn how to groove', c:'study'},{t:'help my kid love music', c:'study', e:1},
+  {t:'sing with me', c:'study'},{t:"let's get that song out of you", c:'study'},
+  {t:'music for our wedding', c:'ceremony', e:1},{t:'shape the whole sonic layer of the day', c:'ceremony'},
+  {t:'our first dance', c:'ceremony'},{t:'walk down the aisle', c:'ceremony'},
+  {t:'a singing ritual', c:'ceremony'},{t:'music for a memorial', c:'ceremony'},
+  {t:'accompanist needed', c:'stage'},{t:'music for my dance piece', c:'stage'},
+  {t:'a music director for our show', c:'stage', e:1},{t:'audition coaching', c:'stage', e:1},{t:'music for film', c:'stage'},
+  {t:'commission something', c:'create'},{t:'devising together', c:'create'},
+  {t:'my band needs ears', c:'create'},{t:'an installation', c:'create'},
+  {t:'creativity coaching', c:'coach', e:1},{t:'sit with my creative process', c:'coach'},
+  {t:'unblock the work', c:'coach'},{t:'grow as an artist', c:'coach'},
+  {t:'hear him play', c:'listen'},{t:'watch him perform', c:'listen'},
+  {t:'recordings', c:'listen'},{t:'live sets', c:'listen'},{t:'I used to play', c:'listen'},
+  {t:'in the studio', c:'studio'},{t:'record a demo', c:'studio'}
+];
+var ROOMNAMES = { study:'Study — lessons, sessions & coaching', ceremony:'Ceremonies & weddings', stage:'Stage & screen', create:'Make something together', coach:'Coaching', listen:'Listen & watch', studio:'In the studio' };
+var FALLBACK = {
+  study:'Part of the study room: lessons, coaching, and music deepening, shaped around the music you actually want to make.',
+  ceremony:'Part of the ceremonial room: music shaped to the day, from the first guest to the last dance.',
+  stage:'Part of the stage and screen room: accompaniment, music direction, and coaching for performers.',
+  create:'Part of the making room: commissions, devising, and collaboration, beginning with a conversation.',
+  coach:'Part of the coaching room: a creativity practice, witnessed and supported over time.',
+  listen:'Part of the listening room: recordings, videos, and live sets, gathered in one place.',
+  studio:'Part of the studio room: a home studio in central Austin for acoustic recording and demos.'
+};
+var BLURBS = {
+  'piano lessons':'Piano and keyboards, from first notes to fluent improvisation, shaped around the music you actually want to make. In person in Windsor Park, near Mueller, or at your home.',
+  'voice lessons':'Voice lessons and singing accompaniment, shaped around the music you actually want to make.',
+  'guitar lessons':'Guitar, from first chords to your own songs, shaped around the music you actually want to make.',
+  'songwriting':'He writes songs about life, love and the natural world, and helps other people get theirs out of them.',
+  'music theory':'Theory is a map of why music moves you: how chords lean, how melodies land, how to read what you hear. We build it from the music you already love, not from a workbook.',
+  "what's a pocket?":'The pocket is a mysterious place. As part of ensemble studies, working together, playing, exploring, listening, we will explore what the heck it is, and what to do with it.',
+  'I want to learn how to groove':'Groove is ensemble work: finding the pocket, holding rhythmic consistency, listening wider than your own part. We explore it by playing together, not by diagram.',
+  'help my kid love music':'Love of music cannot be made to happen. It can be encouraged: hanging out, following the child\u2019s lead, holding space for exploration. That is the honest shape of this work.',
+  'music for our wedding':'Music for the day as a whole, not just the moments everyone notices. I work with couples and planners to shape the sonic layer of the ceremony and celebration.',
+  'shape the whole sonic layer of the day':'There is a difference between booking songs and shaping a day. This is ceremony music direction: the arc of sound from the first guest arriving to the last dance.',
+  'audition coaching':'Coaching for actors and singers preparing to audition, including musical theater: the song, the cut, the room, and how to walk into it as yourself.',
+  'a music director for our show':'Music direction for theater and performance: ensemble leadership, live musicians, and the sound of the whole production, held together.',
+  'accompanist needed':'He accompanies dancers and storytellers with live improvised music, and singers at the piano. Accompaniment is listening, played.',
+  'creativity coaching':'Someone who sits with another person\u2019s creative process or creative identity and helps make it more alive and supports them. That is the coaching, whatever the medium.',
+  'in the studio':'A home studio in central Austin: a soundproof room, a Neumann u87, and time that does not feel like a ticking clock.'
+};
+
+/* ================= ROOMS ================= */
+var REACH = '<div class="reach"><p class="big">Reach out, and we will find a time that works.</p>'
+  + '<p><a href="mailto:gregalexanderheartsyou@gmail.com">gregalexanderheartsyou@gmail.com</a> · 802-734-6148</p></div>';
+var ROOMS = {
+study:{ kick:'Study', title:'Lessons, sessions & coaching', sub:'shaped around the music you actually want to make', img:'assets/keys.jpg',
+  body:'<p>Gregory Alexander is a musician, performing artist, coach, and facilitator in Austin with a BFA in Musical Theatre. Private lessons and coaching in piano and keyboards, voice, guitar, songwriting and composition, improvisation, and ear training, shaped around the music you actually want to make. The intention is to cultivate play, joy, and curiosity.</p>'
+  + '<p>There is no split here between lessons for kids and lessons for adults; the work is the same work. What differs is the aim: learning an instrument, deepening a practice, or being coached and supported in the learning itself. Coaching reaches past any single instrument, too: practice, goals, dynamics, and passion can be coached whether or not it is an instrument he plays.</p>'
+  + '<h4>The pocket</h4><p>The pocket is a mysterious place. As part of ensemble studies, working together, playing, exploring, listening, we will explore what the heck it is, and what to do with it.</p>'
+  + '<h4>Help my kid love music</h4><p>Love of music cannot be made to happen. It can be encouraged: hanging out with a kid, following their lead, holding space for learning, growth, and exploration. If a parent hires him for that, that is the shape the work honestly takes.</p>'
+  + '<p>Starting at $60/hour. Lesson times are arranged individually.</p>',
+  ways:['piano lessons','voice lessons','guitar lessons','songwriting','music theory',"what's a pocket?",'I want to learn how to groove','help my kid love music'] },
+ceremony:{ kick:'Ceremonies', title:'Ceremonies & weddings', sub:'music shaped to the day', img:'assets/melodica.jpg',
+  body:'<p>I work with couples and wedding planners to create the perfect sonic layer for their special day.</p>'
+  + '<p>It is a range, not a list. At one end, improvising something beautiful while the bride walks down the aisle. At the other, being the musical director of the whole wedding: choosing the music, finding the right players, deciding the processional, acting as the organizational musical voice with the couple and the planner.</p>'
+  + '<h4>Ways it can look</h4><ul><li>Help curating and music-directing the wedding</li><li>Playing for somebody to sing</li><li>Singing during cocktail hour, or singing the aisle song</li><li>Sound healing at the front, singing bowls during the processional</li></ul>'
+  + '<p>He also co-creates Austin\u2019s quarterly Community Singing Rituals, and plays music for memorials and gatherings where the room itself is the occasion.</p>',
+  ways:['music for our wedding','shape the whole sonic layer of the day','our first dance','walk down the aisle','a singing ritual','music for a memorial'] },
+stage:{ kick:'Stage & screen', title:'Stage & screen work', sub:'accompaniment, music direction, coaching', img:'assets/gregory.jpg',
+  body:'<p>He accompanies dancers and storytellers with live improvised music, and is currently music-directing Sarah Bentley\u2019s Impermanence album project. His play spans theater, dance, ceremony, and performance art.</p>'
+  + '<p>He has performed at some of Austin\u2019s premiere venues including the Continental Club, Antone\u2019s and Cactus Cafe, and has played in folk festivals from Colorado to Connecticut.</p>'
+  + '<h4>Audition coaching</h4><p>He also coaches acting and audition preparation, including musical theater: the song, the cut, the room, and how to walk into it as yourself.</p>',
+  ways:['accompanist needed','music for my dance piece','a music director for our show','audition coaching','music for film'] },
+create:{ kick:'Create', title:'Make something together', sub:'commissions, devising, collaboration', img:'assets/well.jpg',
+  body:'<p>Gregory Alexander is a creative facilitator, interdisciplinary artist, and devotee of the improvised moment. Commissions are an engine of his work: a theme, an occasion, a deadline, and something new exists that did not before.</p>'
+  + '<p>Work spans music and theater, ensemble leadership, improvisation, recording, and community arts, with an emphasis on helping people explore confidence, creativity, collaboration, and authentic artistic expression.</p>'
+  + '<p>If you are making something and it needs ears, a deviser, or a composer in the room, the way in is a conversation.</p>',
+  ways:['commission something','devising together','my band needs ears','an installation'] },
+coach:{ kick:'Coaching', title:'Coaching', sub:'a creativity practice, witnessed and supported', img:'assets/piano.jpg',
+  body:'<p>Someone who sits with another person\u2019s creative process or creative identity and helps make it more alive and supports them. That sentence covers the lessons, the ceremonial work, and this: coaching for artists and makers in any medium, with music and sound at the center.</p>'
+  + '<p>It is the work of a creativity professional: art, writing, general creative practice, and the life around the work, including the presence-based and spiritual edges of it, as they arise.</p>',
+  ways:['creativity coaching','sit with my creative process','unblock the work','grow as an artist'] },
+listen:{ kick:'Witness', title:'Listen & watch', sub:'the work, as it exists so far', img:'assets/album.jpg',
+  body:'<p>A singer and multi-instrumentalist described as a "deeply gifted vocalist" and "magician." Recordings, videos, and live sets live here, and the shelf grows.</p>'
+  + '<p>He recorded an album, "Any Day: Greg Alexander sings the songs of Ryan Fauber," released on the Burlington-based label Jenke Records. He performs "The Absent-Minded Pirate," written by Billy Lucas. He plays with Sparrowji, Mystic Revival, and Awakened Hearts, and co-leads the song circles of Home Street Music.</p>'
+  + '<p><a href="https://www.reverbnation.com/gregoryalexanderofficial" target="_blank" rel="noopener">Listen on ReverbNation</a></p>',
+  ways:['hear him play','watch him perform','recordings','live sets','I used to play'] },
+studio:{ kick:'Studio', title:'In the studio', sub:'record where the clock is not cold', img:'assets/piano.jpg',
+  body:'<p>Located in central Austin, Gregory Alexander\u2019s home studio is a great place to record acoustic music. His professional gear includes a Neumann u87 microphone and a soundproof room. Whether you have a project in mind or just want to lay down a demo, he can help you craft the sound you want.</p>'
+  + '<p>"I aim for it to be a space where artists can embrace the truth of their work without feeling the pressure of the ticking clock and the coldness of commercial recording environments."</p>',
+  ways:['in the studio','record a demo'] }
+};
+
+/* ================= FIELD ENGINE (the Lens) ================= */
+var field = document.getElementById('field');
+var instances = [];
+P.forEach(function(p){
+  var copies = p.e ? 10 : 7;
+  for(var i=0;i<copies;i++){
+    var el = document.createElement('button');
+    el.type = 'button'; el.className = 'phrase'; el.textContent = p.t;
+    field.appendChild(el);
+    var it = { p:p, el:el, x:0, y:0, z:0.9 + rnd()*0.2, f:0, lit:false, lastB:-1 };
+    el.addEventListener('click', function(){ if(it.f > 0.35 || it === winner) openCard(p); else { px = it.x; py = it.y; pointerOn = true; } });
+    instances.push(it);
+  }
+});
+var ANCHORS = [
+  {t:'Study', x:20, y:30},{t:'Ceremony', x:78, y:26},{t:'Stage', x:22, y:74},
+  {t:'Create', x:76, y:72},{t:'Coaching', x:50, y:90},{t:'Listen', x:50, y:13},{t:'Studio', x:90, y:50}
+];
+var anchorEls = ANCHORS.map(function(a){
+  var el = document.createElement('div'); el.className = 'anchorWord'; el.textContent = a.t;
+  document.getElementById('fieldView').appendChild(el); return {a:a, el:el};
+});
+var W = 0, H = 0, baseFS = 12, fieldReady = false;
+function layout(){
+  var fv = document.getElementById('fieldView');
+  W = fv.clientWidth; H = fv.clientHeight;
+  baseFS = Math.max(10.5, Math.min(13.5, W/95));
+  var order = instances.slice();
+  for(var i=order.length-1;i>0;i--){ var j = Math.floor(rnd()*(i+1)); var tmp = order[i]; order[i] = order[j]; order[j] = tmp; }
+  var cols = Math.max(4, Math.round(W/168));
+  var rows = Math.ceil(order.length/cols);
+  var cellW = W/cols, cellH = Math.min(48, H/Math.max(rows,1));
+  order.forEach(function(it, idx){
+    var cx = idx % cols, cy = Math.floor(idx/cols);
+    it.x = (cx + 0.5)*cellW + (rnd()-0.5)*cellW*0.62;
+    it.y = 90 + cy*cellH + (rnd()-0.5)*cellH*0.55;
+    it.el.style.fontSize = (baseFS*it.z*1.0) + 'px';
+    it.el.style.left = it.x + 'px'; it.el.style.top = it.y + 'px';
+  });
+  anchorEls.forEach(function(o){
+    o.el.style.left = (o.a.x/100*W) + 'px'; o.el.style.top = (o.a.y/100*H) + 'px';
+    o.el.style.fontSize = Math.max(20, W/34) + 'px';
+  });
+  drawDust();
+  fieldReady = true;
+}
+var dust = document.getElementById('dust'), dctx = dust.getContext('2d');
+function drawDust(){
+  dust.width = W; dust.height = H;
+  var drnd = mulberry32(777); dctx.clearRect(0,0,W,H);
+  for(var i=0;i<240;i++){
+    var sr = drnd();
+    dctx.globalAlpha = drnd()*0.32 + 0.05; dctx.fillStyle = '#cfd6e4';
+    dctx.beginPath(); dctx.arc(drnd()*W, drnd()*H, sr < 0.12 ? (drnd()*1.1 + 0.5) : (drnd()*0.55 + 0.15), 0, 7); dctx.fill();
+  }
+  dctx.globalAlpha = 1;
+}
+var px = -9999, py = -9999, pointerOn = false, winner = null;
+window.addEventListener('pointermove', function(e){ px = e.clientX; py = e.clientY; pointerOn = true; });
+window.addEventListener('pointerdown', function(e){ px = e.clientX; py = e.clientY; pointerOn = true; });
+document.addEventListener('mouseleave', function(){ pointerOn = false; });
+var RADIUS = 165;
+function frame(){
+  if(fieldReady && document.getElementById('fieldView').classList.contains('on')){
+    var best = null, bestD = Infinity, i, it, dx, dy, d;
+    if(pointerOn){
+      for(i=0;i<instances.length;i++){
+        it = instances[i]; dx = it.x - px; dy = it.y - py; d = Math.sqrt(dx*dx + dy*dy);
+        if(it === winner) d *= 0.92;
+        if(d < bestD){ bestD = d; best = it; }
+      }
+      if(bestD > RADIUS) best = null;
+    }
+    winner = best;
+    for(var k=0;k<instances.length;k++){
+      var o = instances[k], target = 0;
+      if(pointerOn){
+        var ddx = o.x - px, ddy = o.y - py, dd = Math.sqrt(ddx*ddx + ddy*ddy);
+        target = Math.max(0, 1 - dd/190) * 0.38;
+        if(o === winner) target = 1;
+        else if(winner && o.p === winner.p) target = Math.max(target, 0.30);
+      }
+      var rate = (o === winner) ? 0.34 : 0.16;
+      o.f += (target - o.f) * rate;
+      if(o.f < 0.004 && target === 0) o.f = 0;
+      var f = o.f;
+      o.el.style.transform = 'translate(-50%,-50%) scale(' + (1 + f*1.75).toFixed(3) + ')';
+      o.el.style.opacity = (0.13 + f*0.87).toFixed(3);
+      o.el.style.zIndex = String(2 + Math.round(f*40));
+      if(Math.abs(f - o.lastB) > 0.06 || (f === 0 && o.lastB !== 0) || (f > 0.97 && o.lastB <= 0.97)){
+        o.el.style.filter = f <= 0.01 ? 'blur(1.1px)' : (f > 0.97 ? 'none' : 'blur(' + (1.1*(1-f)).toFixed(2) + 'px)');
+        o.lastB = f;
+      }
+      var lit = f > 0.55;
+      if(lit !== o.lit){ o.lit = lit; o.el.style.color = lit ? '#f2d68c' : '#aab4c8'; }
+    }
+  }
+  requestAnimationFrame(frame);
+}
+
+/* ================= CARD ================= */
+var card = document.getElementById('card'), cardRoom = 'study';
+function openCard(p){
+  cardRoom = p.c;
+  document.getElementById('cardTitle').textContent = p.t;
+  document.getElementById('cardBody').textContent = BLURBS[p.t] || FALLBACK[p.c];
+  document.getElementById('cardMore').textContent = 'For more on how we can work together on this → ' + ROOMNAMES[p.c];
+  card.classList.add('open'); card.setAttribute('aria-hidden','false');
+}
+function closeCard(){ card.classList.remove('open'); card.setAttribute('aria-hidden','true'); }
+document.getElementById('cardClose').addEventListener('click', closeCard);
+document.getElementById('cardMore').addEventListener('click', function(){ closeCard(); location.hash = '#room/' + cardRoom; });
+document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeCard(); });
+
+/* ================= ROOMS / EVERYTHING / ABOUT ================= */
+var SIDEWAYS = [['study','Study'],['ceremony','Ceremonies'],['stage','Stage & screen'],['create','Create'],['coach','Coaching'],['listen','Listen & watch'],['studio','Studio']];
+function renderRoom(id){
+  var r = ROOMS[id]; if(!r){ location.hash = '#field'; return; }
+  var ways = r.ways.map(function(t){
+    var p = null; P.forEach(function(q){ if(q.t === t) p = q; });
+    return p ? '<button type="button" data-t="' + t.replace(/"/g,'&quot;') + '">' + t + '</button>' : '';
+  }).join('');
+  var side = SIDEWAYS.filter(function(s){ return s[0] !== id; }).map(function(s){ return '<a href="#room/' + s[0] + '">' + s[1] + '</a>'; }).join(' · ');
+  document.getElementById('roomWrap').innerHTML =
+    '<div class="kick">' + r.kick + '</div><h2>' + r.title + '</h2><div class="sub">' + r.sub + '</div>'
+    + '<img class="hero" src="' + r.img + '" alt="">' + r.body
+    + '<h4>Phrases that live here</h4><div class="waysIn">' + ways + '</div>'
+    + REACH + '<div class="sideways">Sideways: ' + side + ' · <a href="#field">back to the field</a> · <a href="#everything">everything</a></div>';
+  Array.prototype.forEach.call(document.querySelectorAll('#roomWrap .waysIn button'), function(b){
+    b.addEventListener('click', function(){
+      var found = null; P.forEach(function(q){ if(q.t === b.getAttribute('data-t')) found = q; });
+      if(found) openCard(found);
+    });
+  });
+  window.scrollTo(0,0);
+}
+function renderEverything(){
+  var groups = [['study','Study — lessons, sessions & coaching'],['ceremony','Ceremonies & weddings'],['stage','Stage & screen'],['create','Make something together'],['coach','Coaching'],['listen','Listen & watch'],['studio','In the studio']];
+  var html = '<h2>Everything</h2><p class="lede">Every way in, plainly. The field, without the weather.</p>';
+  groups.forEach(function(g){
+    html += '<h3><a href="#room/' + g[0] + '">' + g[1] + '</a></h3>';
+    P.forEach(function(p){ if(p.c === g[0]) html += '<button class="phr" type="button" data-t="' + p.t.replace(/"/g,'&quot;') + '">' + p.t + '</button>'; });
+  });
+  html += REACH;
+  document.getElementById('everythingWrap').innerHTML = html;
+  Array.prototype.forEach.call(document.querySelectorAll('#everythingWrap .phr'), function(b){
+    b.addEventListener('click', function(){
+      var found = null; P.forEach(function(q){ if(q.t === b.getAttribute('data-t')) found = q; });
+      if(found) openCard(found);
+    });
+  });
+}
+function renderAbout(){
+  document.getElementById('aboutWrap').innerHTML =
+    '<h2>About</h2><img class="hero" src="assets/gregory.jpg" alt="Gregory Alexander">'
+    + '<p>Gregory Alexander is a creative facilitator, interdisciplinary artist, and devotee of the improvised moment. A singer and multi-instrumentalist described as a "deeply gifted vocalist" and "magician," he co-creates Austin\u2019s quarterly Community Singing Rituals, accompanies dancers and storytellers with live improvised music, and is currently music-directing Sarah Bentley\u2019s Impermanence album project. His play spans theater, dance, ceremony, and performance art, with an emphasis on helping people explore confidence, creativity, collaboration, and authentic expression.</p>'
+    + '<p>Greg Alexander is a songwriter, multi-instrumentalist, music teacher, and recording artist. He performs on guitar, piano, harmonica, flute and melodica and he writes songs about life, love and the natural world. He also performs with the bands Mystic Revival and Awakened Hearts.</p>'
+    + '<p>He was fortunate to have grown up in a musical family in Kerville, Texas in the 1970s and 80s. His father, Hilary A. Alexander, was a busker and folk singer who traveled throughout the US and Europe before settling in Kerrville. Greg grew up as part of the folk community behind the Kerrville Folk Festival, and that world has been instrumental in shaping his music and his life.</p>'
+    + '<p>Greg has performed at some of Austin\u2019s premiere venues including the Continental Club, Antone\u2019s and Cactus Cafe, and has played in folk festivals from Colorado to Connecticut. He also recorded an album, "Any Day: Greg Alexander sings the songs of Ryan Fauber," that was released on the Burlington-based label, Jenke Records.</p>'
+    + REACH;
+}
+
+/* ================= ROUTING ================= */
+var VIEWS = { cover:'cover', field:'fieldView', everything:'everythingView', about:'aboutView', room:'roomView' };
+function route(){
+  var h = (location.hash || '#cover').slice(1);
+  var parts = h.split('/'), name = parts[0] || 'cover';
+  if(!VIEWS[name]) name = 'cover';
+  Object.keys(VIEWS).forEach(function(k){ document.getElementById(VIEWS[k]).classList.toggle('on', k === name); });
+  closeCard();
+  if(name === 'room') renderRoom(parts[1] || 'study');
+  if(name === 'field'){ layout(); }
+  if(name !== 'field') window.scrollTo(0,0);
+}
+window.addEventListener('hashchange', route);
+/* Direct click routing: some preview viewers swallow hash changes, so internal
+   links also drive the router themselves. route() is idempotent. */
+document.addEventListener('click', function(e){
+  var a = e.target && e.target.closest ? e.target.closest('a[href^="#"]') : null;
+  if(!a) return;
+  var h = a.getAttribute('href');
+  if(h && h.length > 1){ e.preventDefault(); if(location.hash !== h) location.hash = h; route(); }
+});
+var resizeTimer = null;
+window.addEventListener('resize', function(){ clearTimeout(resizeTimer); resizeTimer = setTimeout(function(){ if(document.getElementById('fieldView').classList.contains('on')) layout(); }, 180); });
+
+/* cover stars */
+(function(){
+  var c = document.getElementById('coverStars'), x = c.getContext('2d');
+  function draw(){
+    c.width = window.innerWidth; c.height = window.innerHeight;
+    var drnd = mulberry32(4242); x.clearRect(0,0,c.width,c.height);
+    for(var i=0;i<170;i++){
+      x.globalAlpha = drnd()*0.5 + 0.1; x.fillStyle = '#dfe6f2';
+      x.beginPath(); x.arc(drnd()*c.width, drnd()*c.height, drnd()*1.1 + 0.2, 0, 7); x.fill();
+    }
+    x.globalAlpha = 1;
+  }
+  draw(); window.addEventListener('resize', draw);
+})();
+
+renderEverything();
+renderAbout();
+route();
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>
