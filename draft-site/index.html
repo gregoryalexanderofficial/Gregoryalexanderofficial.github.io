@@ -141,6 +141,8 @@
   .photoStrip{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:14px 0 6px;}
   .photoStrip img{width:100%;height:150px;object-fit:cover;border-radius:8px;display:block;}
   .basicsSec{font-weight:normal;font-size:23px;color:#8a3c0c;margin:36px 0 6px;}
+  .vidWrap{position:relative;padding-top:56.25%;margin:8px 0 20px;}
+  .vidWrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0;border-radius:10px;box-shadow:0 10px 30px rgba(90,55,15,.22);}
 </style>
 </head>
 <body>
@@ -335,7 +337,14 @@ listen:{ kick:'Witness', title:'Listen & watch', sub:'the work, as it exists so 
   ways:['hear him play','watch him perform','recordings','live sets','I used to play','watch him play','hear him sing','see him live'], img2:'assets/well.jpg' },
 studio:{ kick:'Studio work', title:'In the studio', sub:'session work: his playing and singing, on your record', img:'assets/piano.jpg',
   body:'<p>Studio work, here, means session work: Gregory is hireable to come in and record on your album: vocals, guitar, piano, and synth.</p>'
-  + '<p>He performs on guitar, piano, harmonica, flute and melodica, and writes songs about life, love and the natural world. If your track needs a voice or an instrument played by someone listening as much as playing, that is the offer.</p>',
+  + '<p>He performs on guitar, piano, harmonica, flute and melodica, and writes songs about life, love and the natural world. If your track needs a voice or an instrument played by someone listening as much as playing, that is the offer.</p>'
+  + '<h4>Selected session work</h4>'
+  + '<p><strong>Space Zombie</strong>, Mary Doodles\u2019 animated short (2012). The score is his improvised piano, recorded in a professional studio; Dante added theremin and drums.</p>'
+  + '<div class="vidWrap"><iframe src="https://www.youtube-nocookie.com/embed/qwD5r6xCxiM" title="Space Zombie, animated short by Mary Doodles" loading="lazy" allowfullscreen></iframe></div>'
+  + '<p><strong>Awkward White Guys in Shorts</strong>, Nice Peter\u2019s single (Maker Studios, 2012). He plays piano on the studio recording, and he is one of the four awkward white guys on screen.</p>'
+  + '<div class="vidWrap"><iframe src="https://www.youtube-nocookie.com/embed/dC3cnPqs3m4" title="Awkward White Guys in Shorts, Nice Peter" loading="lazy" allowfullscreen></iframe></div>'
+  + '<p><strong>The Absent-Minded Pirate</strong>, Billy Lucas\u2019s musical. He sang lead on the cast recording: musical-theater singing, tracked in studio.</p>'
+  + '<p>And his own album <strong>Any Day</strong> (2012), three tracks of which play on the Basics page and in the listening room.</p>',
   ways:['in the studio','sing on your record','play on your album','play keys on your album','vocals for your track','guitar for your session','synth on your record','a singer for your session'], img2:'assets/tg.jpg' }
 };
 
