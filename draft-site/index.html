@@ -53,10 +53,12 @@
     font-size:clamp(11.5px,1.4vw,13.5px);color:#79839a;pointer-events:none;text-shadow:0 0 12px rgba(7,11,22,.95);}
 
   /* ---------- micro card ---------- */
-  #card{position:fixed;left:50%;bottom:26px;transform:translate(-50%,18px);width:min(480px,calc(100vw - 32px));
+  #card{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%) scale(.86);width:min(480px,calc(100vw - 32px));
     background:rgba(13,18,34,.97);border:1px solid rgba(242,214,140,.45);border-radius:14px;padding:20px 22px 16px;z-index:80;
-    opacity:0;pointer-events:none;transition:opacity .25s ease,transform .25s ease;box-shadow:0 18px 50px rgba(0,0,0,.55);}
-  #card.open{opacity:1;pointer-events:auto;transform:translate(-50%,0);}
+    opacity:0;pointer-events:none;transition:opacity .38s ease,transform .38s cubic-bezier(.22,1.36,.36,1),box-shadow .38s ease;
+    box-shadow:0 0 0 0 rgba(242,214,140,0),0 18px 50px rgba(0,0,0,.55);}
+  #card.open{opacity:1;pointer-events:auto;transform:translate(-50%,-50%) scale(1);
+    box-shadow:0 0 90px 14px rgba(242,214,140,.20),0 18px 50px rgba(0,0,0,.55);}
   #card h3{font-size:19px;font-weight:normal;color:#f2d68c;margin-bottom:8px;padding-right:26px;}
   #card p{font-size:14.5px;line-height:1.55;color:#ddd8ca;}
   #card .more{display:inline-block;margin-top:13px;font-size:13.5px;font-style:italic;color:#f2d68c;text-decoration:none;border-bottom:1px dotted rgba(242,214,140,.6);cursor:pointer;background:none;border-top:none;border-left:none;border-right:none;padding:0;}
@@ -174,7 +176,7 @@ var P = [
   {t:'unblock the work', c:'coach'},{t:'grow as an artist', c:'coach'},{t:'support my practice', c:'coach'},{t:'sit with my creative identity', c:'coach'},{t:'help my work come alive', c:'coach'},{t:'a witness for my process', c:'coach'},
   {t:'hear him play', c:'listen'},{t:'watch him perform', c:'listen'},
   {t:'recordings', c:'listen'},{t:'live sets', c:'listen'},{t:'I used to play', c:'listen'},{t:'watch him play', c:'listen'},{t:'hear him sing', c:'listen'},{t:'see him live', c:'listen'},
-  {t:'in the studio', c:'studio'},{t:'record a demo', c:'studio'},{t:'lay down a demo', c:'studio'},{t:'record my songs', c:'studio'},{t:'craft the sound I want', c:'studio'},{t:'track a record', c:'studio'},{t:'a demo that sounds like me', c:'studio'},{t:'record my band', c:'studio'}
+  {t:'in the studio', c:'studio'},{t:'sing on your record', c:'studio'},{t:'play on your album', c:'studio'},{t:'play keys on your album', c:'studio'},{t:'vocals for your track', c:'studio'},{t:'guitar for your session', c:'studio'},{t:'synth on your record', c:'studio'},{t:'a singer for your session', c:'studio'}
 ];
 var ROOMNAMES = { study:'Study — lessons, sessions & coaching', ceremony:'Ceremonies & weddings', stage:'Stage & screen', create:'Make something together', coach:'Coaching', listen:'Listen & watch', studio:'In the studio' };
 var FALLBACK = {
@@ -184,7 +186,7 @@ var FALLBACK = {
   create:'Part of the making room: commissions, devising, and collaboration, beginning with a conversation.',
   coach:'Part of the coaching room: a creativity practice, witnessed and supported over time.',
   listen:'Part of the listening room: recordings, videos, and live sets, gathered in one place.',
-  studio:'Part of the studio room: a home studio in central Austin for acoustic recording and demos.'
+  studio:'Part of the studio room: session work, his singing and playing recorded on your album.'
 };
 var BLURBS = {
   'piano lessons':'Piano and keyboards, from first notes to fluent improvisation, shaped around the music you actually want to make. In person in Windsor Park, near Mueller, or at your home.',
@@ -201,7 +203,8 @@ var BLURBS = {
   'a music director for our show':'Music direction for theater and performance: ensemble leadership, live musicians, and the sound of the whole production, held together.',
   'accompanist needed':'He accompanies dancers and storytellers with live improvised music, and singers at the piano. Accompaniment is listening, played.',
   'creativity coaching':'Someone who sits with another person\u2019s creative process or creative identity and helps make it more alive and supports them. That is the coaching, whatever the medium.',
-  'in the studio':'A home studio in central Austin: a soundproof room, a Neumann u87, and time that does not feel like a ticking clock.',
+  'in the studio':'Studio work means his singing and playing on your record: vocals, guitar, piano, and synth, recorded in your session, on your album.',
+  'sing on your record':'A singer and multi-instrumentalist, hireable to come in and record on your album: vocals, guitar, piano, synth.',
   'a sound bath':'Sound healing at the front of the room: singing bowls, voice, and quiet instruments, holding the space while it happens.'
 };
 
@@ -241,10 +244,10 @@ listen:{ kick:'Witness', title:'Listen & watch', sub:'the work, as it exists so 
   + '<p>He recorded an album, "Any Day: Greg Alexander sings the songs of Ryan Fauber," released on the Burlington-based label Jenke Records. He performs "The Absent-Minded Pirate," written by Billy Lucas. He plays with Sparrowji, Mystic Revival, and Awakened Hearts, and co-leads the song circles of Home Street Music.</p>'
   + '<p><a href="https://www.reverbnation.com/gregoryalexanderofficial" target="_blank" rel="noopener">Listen on ReverbNation</a></p>',
   ways:['hear him play','watch him perform','recordings','live sets','I used to play','watch him play','hear him sing','see him live'] },
-studio:{ kick:'Studio', title:'In the studio', sub:'record where the clock is not cold', img:'assets/piano.jpg',
-  body:'<p>Located in central Austin, Gregory Alexander\u2019s home studio is a great place to record acoustic music. His professional gear includes a Neumann u87 microphone and a soundproof room. Whether you have a project in mind or just want to lay down a demo, he can help you craft the sound you want.</p>'
-  + '<p>"I aim for it to be a space where artists can embrace the truth of their work without feeling the pressure of the ticking clock and the coldness of commercial recording environments."</p>',
-  ways:['in the studio','record a demo','lay down a demo','record my songs','craft the sound I want','track a record','a demo that sounds like me','record my band'] }
+studio:{ kick:'Studio work', title:'In the studio', sub:'session work: his playing and singing, on your record', img:'assets/piano.jpg',
+  body:'<p>Studio work, here, means session work: Gregory is hireable to come in and record on your album: vocals, guitar, piano, and synth.</p>'
+  + '<p>He performs on guitar, piano, harmonica, flute and melodica, and writes songs about life, love and the natural world. If your track needs a voice or an instrument played by someone listening as much as playing, that is the offer.</p>',
+  ways:['in the studio','sing on your record','play on your album','play keys on your album','vocals for your track','guitar for your session','synth on your record','a singer for your session'] }
 };
 
 /* ================= FIELD ENGINE (the Lens) ================= */
