@@ -1,3 +1,5 @@
+> **CONTAMINATED SOURCE (flagged Nov 24, 2026): this old-site copy contains biographical claims Greg disowns and the verified record contradicts: "father Hilary A. Alexander" (his father was Charles Alexander, d. spring 2013), "grew up in Kerville/Kerrville in the 1970s-80s" (he grew up in Vermontville, NY; Kerrville entered his life in 2010), and the Continental Club / Antone's / folk-festivals venue lines (Greg: he has not performed there). Do NOT reuse as copy without Greg's line-by-line fact pass.**
+
 # Home — https://gregalexanderheart.wixsite.com/website
 
 Verbatim copy extracted from the live Wix Home page on Nov 10, 2026. The live header menu (About, Studio Sessions, "Lessons", Creativity Coaching, Media, Current Projects, Contact) is made of anchor links to sections of this single page.
