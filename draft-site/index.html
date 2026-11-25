@@ -16,7 +16,7 @@
     padding:13px 20px;background:linear-gradient(rgba(7,11,22,.88),rgba(7,11,22,0));}
   .cragSvg{display:none;}
   body.fieldOn #nav{background:#04060c;}
-  body.fieldOn .cragSvg{display:block;position:absolute;left:0;top:100%;width:100%;height:30px;pointer-events:none;}
+  body.fieldOn .cragSvg{display:block;position:absolute;left:0;top:100%;width:100%;height:52px;pointer-events:none;}
   #nav .name{letter-spacing:.22em;text-transform:uppercase;font-size:13px;color:#ece7d9;text-decoration:none;}
   #nav .links a{margin-left:18px;font-size:13.5px;font-style:italic;color:#b9c0d0;text-decoration:none;}
   #nav .links a:hover{color:#f2d68c;}
@@ -41,7 +41,7 @@
   #cover .where{margin-top:36px;font-size:13px;letter-spacing:.18em;color:#8b94a9;text-transform:uppercase;}
 
   /* ---------- field ---------- */
-  #fieldView{position:relative;overflow:hidden;background:#070b16;}
+  #fieldView{position:relative;overflow:hidden;background:linear-gradient(180deg,#0d1a3d 0%,#0a1430 30%,#060d20 62%,#04060f 100%);}
   #dust{position:absolute;inset:0;z-index:0;}
   #field{position:absolute;inset:0;z-index:2;cursor:crosshair;}
   .phrase{position:absolute;transform:translate(-50%,-50%);white-space:nowrap;color:#aab4c8;background:none;border:none;
@@ -183,7 +183,7 @@
     <a href="#field">The field</a><a href="#basics">The basics</a><a href="#everything">Everything</a><a href="#about">About</a><a href="mailto:gregalexanderheartsyou@gmail.com">Contact</a>
   </div>
 
-  <svg class="cragSvg" viewBox="0 0 1440 34" preserveAspectRatio="none" aria-hidden="true"><path d="M0,0 L1440,0 L1440,8 L1440,16 L1403,18 L1372,8 L1310,9 L1259,24 L1228,22 L1187,7 L1154,19 L1100,8 L1057,8 L994,19 L963,24 L928,13 L897,24 L844,7 L802,7 L739,10 L693,19 L656,23 L621,24 L574,23 L535,9 L471,26 L431,17 L397,23 L365,24 L334,25 L293,21 L231,19 L183,20 L126,17 L79,13 L40,28 L0,12 Z" fill="#04060c"/></svg>
+  <svg class="cragSvg" viewBox="0 0 1440 56" preserveAspectRatio="none" aria-hidden="true"><path d="M0,0 L1440,0 L1440,7 L1377,19 L1320,12 L1255,7 L1195,13 L1128,18 L1094,12 L1057,6 L985,15 L919,22 L863,16 L796,16 L729,4 L668,5 L638,7 L595,15 L538,10 L473,19 L412,8 L366,13 L296,6 L227,9 L164,22 L131,17 L83,18 L23,9 L0,14 Z" fill="#0c1731"/><path d="M0,0 L1440,0 L1440,18 L1406,46 L1354,18 L1325,47 L1297,24 L1266,33 L1193,30 L1161,36 L1121,44 L1076,28 L1029,28 L975,43 L940,21 L867,20 L836,33 L777,22 L714,23 L654,23 L580,44 L526,39 L491,30 L450,16 L385,27 L356,24 L303,52 L237,39 L203,18 L166,24 L122,16 L55,28 L9,30 L0,19 Z" fill="#010204"/></svg>
 </nav>
 
 <!-- PORTAL -->
@@ -451,10 +451,10 @@ function layout(){
       it.hy = home.y + gauss()*H*0.13;
     } else {
       it.hx = 30 + rnd()*(W - 60);
-      it.hy = 100 + rnd()*(H - 130);
+      it.hy = 58 + rnd()*(H - 88);
     }
     it.hx = Math.max(24, Math.min(W - 24, it.hx));
-    it.hy = Math.max(W < 640 ? 150 : 84, Math.min(H - 16, it.hy));
+    it.hy = Math.max(W < 640 ? 96 : 26, Math.min(H - 16, it.hy));
     it.x = it.hx; it.y = it.hy;
     it.el.style.fontSize = (baseFS*it.z*1.0) + 'px';
     it.w = it.el.offsetWidth;
@@ -474,12 +474,12 @@ function drawDust(){
   var neb = document.createElement('canvas'); neb.width = W; neb.height = H;
   var nctx = neb.getContext('2d');
   var drnd0 = mulberry32(4242);
-  var nebCols = ['rgba(70,54,150,', 'rgba(26,84,104,', 'rgba(116,46,84,', 'rgba(34,54,128,', 'rgba(88,60,140,'];
-  for(var nb=0; nb<6; nb++){
-    var nx = drnd0()*W, ny = drnd0()*H, nr = (0.28 + drnd0()*0.34) * W;
+  var nebCols = ['rgba(64,52,168,', 'rgba(24,92,150,', 'rgba(110,44,120,', 'rgba(30,64,168,', 'rgba(80,58,170,', 'rgba(20,110,140,'];
+  for(var nb=0; nb<8; nb++){
+    var nx = drnd0()*W, ny = nb < 3 ? drnd0()*H*0.22 : drnd0()*H, nr = (0.28 + drnd0()*0.34) * W;
     var ng = nctx.createRadialGradient(nx, ny, 0, nx, ny, nr);
     var nc = nebCols[nb % nebCols.length];
-    ng.addColorStop(0, nc + '0.085)'); ng.addColorStop(1, nc + '0)');
+    ng.addColorStop(0, nc + '0.16)'); ng.addColorStop(1, nc + '0)');
     nctx.fillStyle = ng; nctx.fillRect(nx - nr, ny - nr, nr*2, nr*2);
   }
   window._neb = neb;
@@ -489,8 +489,8 @@ function drawDust(){
     var sr = drnd(), layer = sr < 0.68 ? 0 : (sr < 0.93 ? 1 : 2);
     stars.push({ x: drnd()*W, y: drnd()*H,
       r: layer === 0 ? (drnd()*0.45 + 0.15) : (layer === 1 ? (drnd()*0.7 + 0.4) : (drnd()*1.0 + 0.9)),
-      a: layer === 0 ? (drnd()*0.22 + 0.05) : (layer === 1 ? (drnd()*0.34 + 0.14) : (drnd()*0.30 + 0.30)),
-      ph: drnd()*6.28, sp: drnd()*1.4 + 0.3, amp: layer === 2 ? (drnd()*0.34 + 0.12) : (drnd()*0.24 + 0.05) });
+      a: layer === 0 ? (drnd()*0.30 + 0.10) : (layer === 1 ? (drnd()*0.38 + 0.22) : (drnd()*0.26 + 0.44)),
+      ph: drnd()*6.28, sp: drnd()*1.4 + 0.3, amp: layer === 2 ? (drnd()*0.36 + 0.16) : (drnd()*0.28 + 0.08) });
   }
 }
 function tickDust(t){
@@ -498,7 +498,9 @@ function tickDust(t){
   dctx.clearRect(0,0,W,H); if(window._neb) dctx.drawImage(window._neb, 0, 0); dctx.fillStyle = '#dfe6f4';
   for(var i=0;i<stars.length;i++){
     var s = stars[i];
-    dctx.globalAlpha = Math.max(0.02, s.a + Math.sin(t*0.001*s.sp + s.ph)*s.amp);
+    var sa = Math.max(0.02, s.a + Math.sin(t*0.001*s.sp + s.ph)*s.amp);
+    if(s.r > 0.9){ dctx.globalAlpha = sa*0.15; dctx.beginPath(); dctx.arc(s.x, s.y, s.r*3.6, 0, 7); dctx.fill(); }
+    dctx.globalAlpha = sa;
     dctx.beginPath(); dctx.arc(s.x, s.y, s.r, 0, 7); dctx.fill();
   }
   dctx.globalAlpha = 1;
