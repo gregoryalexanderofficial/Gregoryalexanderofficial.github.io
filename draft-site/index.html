@@ -380,6 +380,8 @@ function layout(){
   var fv = document.getElementById('fieldView');
   W = fv.clientWidth; H = fv.clientHeight;
   baseFS = Math.max(10.5, Math.min(13.5, W/95));
+  if(W < 640){ surgeK = 2.4; blurMax = 0.7; restO = 0.22; baseFS = Math.max(13.5, Math.min(15.5, W/26)); }
+  else { surgeK = 1.75; blurMax = 1.1; restO = 0.13; }
   var anchorPos = {};
   ANCHORS.forEach(function(a){ anchorPos[a.t.toLowerCase()] = { x: a.x/100*W, y: a.y/100*H }; });
   var homeOf = { study:'study', ceremony:'ceremony', stage:'stage', create:'create', coach:'coaching', listen:'listen', studio:'studio' };
@@ -429,7 +431,8 @@ function tickDust(t){
 }
 var px = -9999, py = -9999, pointerOn = false, winner = null;
 var rx = -9999, ry = -9999, rOn = false, lastAct = performance.now();
-var ff = { it: null, last: null, until: 0, gapUntil: 0 };
+var surgeK = 1.75, blurMax = 1.1, restO = 0.13;
+var autoMode = false, nextTw = 0, lastTw = null, twByP = {};
 var sticky = null, suppressTapUntil = 0;
 window.addEventListener('pointermove', function(e){ rx = e.clientX; ry = e.clientY; rOn = true; lastAct = performance.now(); });
 window.addEventListener('pointerdown', function(e){
@@ -456,25 +459,41 @@ function frame(){
     tickDust(performance.now());
     var nowF = performance.now();
     if(card.classList.contains('open')){
-      px = rx; py = ry; pointerOn = rOn;
+      px = rx; py = ry; pointerOn = rOn; autoMode = false;
     } else if(rOn){
       px = rx; py = ry; pointerOn = true;
-      sticky = null; ff.it = null; ff.gapUntil = nowF + 400;
+      sticky = null; autoMode = false;
     } else if(sticky && nowF < sticky.until){
-      px = sticky.it.x; py = sticky.it.y; pointerOn = true;
-    } else if(nowF - lastAct > 4000){
-      sticky = null;
-      if(ff.it && nowF > ff.until){ ff.it = null; ff.gapUntil = nowF + 800; }
-      if(!ff.it && nowF >= ff.gapUntil && instances.length){
-        var cand = instances[Math.floor(Math.random() * instances.length)];
-        if(cand && cand !== ff.last){ ff.it = cand; ff.last = cand; ff.until = nowF + 2300; }
-      }
-      if(ff.it){ px = ff.it.x; py = ff.it.y; pointerOn = true; } else { pointerOn = false; }
+      px = sticky.it.x; py = sticky.it.y; pointerOn = true; autoMode = false;
+    } else if(nowF - lastAct > 1800){
+      sticky = null; pointerOn = false; autoMode = true;
     } else {
-      pointerOn = false;
-      ff.it = null; ff.gapUntil = nowF + 400;
+      pointerOn = false; autoMode = false;
     }
     if(sticky && nowF >= sticky.until) sticky = null;
+    if(!autoMode){
+      for(var ti=0; ti<instances.length; ti++){ instances[ti].tw = null; instances[ti].twV = 0; }
+      twByP = {};
+    } else {
+      if(nowF >= nextTw && instances.length){
+        var actN = 0, qi;
+        for(qi=0; qi<instances.length; qi++){ if(instances[qi].tw) actN++; }
+        if(actN < 5){
+          var cand2 = instances[Math.floor(Math.random() * instances.length)];
+          if(cand2 && !cand2.tw && cand2 !== lastTw){ cand2.tw = { start: nowF, dur: 1000 + Math.random()*1500, peak: 0.5 + Math.random()*0.5 }; lastTw = cand2; }
+        }
+        nextTw = nowF + 260 + Math.random()*620;
+      }
+      twByP = {};
+      for(var tj=0; tj<instances.length; tj++){
+        var q2 = instances[tj];
+        if(q2.tw){
+          var pr2 = (nowF - q2.tw.start) / q2.tw.dur;
+          if(pr2 >= 1){ q2.tw = null; q2.twV = 0; }
+          else { q2.twV = q2.tw.peak * Math.sin(Math.PI * pr2); if(!twByP[q2.p] || q2.twV > twByP[q2.p]) twByP[q2.p] = q2.twV; }
+        }
+      }
+    }
     var best = null, bestD = Infinity, i, it, dx, dy, d;
     if(pointerOn){
       for(i=0;i<instances.length;i++){
@@ -493,15 +512,20 @@ function frame(){
         if(o === winner) target = 1;
         else if(winner && o.p === winner.p) target = Math.max(target, 0.30);
       }
+      if(autoMode){
+        var tvv = o.tw ? (o.twV || 0) : 0;
+        if(twByP[o.p]) tvv = Math.max(tvv, twByP[o.p] * 0.3);
+        target = Math.max(target, tvv);
+      }
       var rate = (o === winner) ? 0.34 : 0.16;
       o.f += (target - o.f) * rate;
       if(o.f < 0.004 && target === 0) o.f = 0;
       var f = o.f;
-      o.el.style.transform = 'translate(-50%,-50%) scale(' + (1 + f*1.75).toFixed(3) + ')';
-      o.el.style.opacity = (0.13 + f*0.87).toFixed(3);
+      o.el.style.transform = 'translate(-50%,-50%) scale(' + (1 + f*surgeK).toFixed(3) + ')';
+      o.el.style.opacity = (restO + f*(1 - restO)).toFixed(3);
       o.el.style.zIndex = String(2 + Math.round(f*40));
       if(Math.abs(f - o.lastB) > 0.06 || (f === 0 && o.lastB !== 0) || (f > 0.97 && o.lastB <= 0.97)){
-        o.el.style.filter = f <= 0.01 ? 'blur(1.1px)' : (f > 0.97 ? 'none' : 'blur(' + (1.1*(1-f)).toFixed(2) + 'px)');
+        o.el.style.filter = f <= 0.01 ? 'blur(' + blurMax + 'px)' : (f > 0.97 ? 'none' : 'blur(' + (blurMax*(1-f)).toFixed(2) + 'px)');
         o.lastB = f;
       }
       var lit = f > 0.55;
