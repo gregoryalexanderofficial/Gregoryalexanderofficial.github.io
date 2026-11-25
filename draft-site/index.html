@@ -363,7 +363,7 @@ P.forEach(function(p){
     el.type = 'button'; el.className = 'phrase'; el.textContent = p.t;
     field.appendChild(el);
     var it = { p:p, el:el, x:0, y:0, z:0.9 + rnd()*0.2, f:0, lit:false, lastB:-1 };
-    el.addEventListener('click', function(){ openCard(p); });
+    el.addEventListener('click', function(){ if(performance.now() < suppressTapUntil) return; openCard(p); });
     instances.push(it);
   }
 });
@@ -430,9 +430,24 @@ function tickDust(t){
 var px = -9999, py = -9999, pointerOn = false, winner = null;
 var rx = -9999, ry = -9999, rOn = false, lastAct = performance.now();
 var ff = { it: null, last: null, until: 0, gapUntil: 0 };
+var sticky = null, suppressTapUntil = 0;
 window.addEventListener('pointermove', function(e){ rx = e.clientX; ry = e.clientY; rOn = true; lastAct = performance.now(); });
-window.addEventListener('pointerdown', function(e){ rx = e.clientX; ry = e.clientY; rOn = true; lastAct = performance.now(); });
-window.addEventListener('pointerup', function(e){ if(e.pointerType !== 'mouse'){ rOn = false; lastAct = performance.now(); } });
+window.addEventListener('pointerdown', function(e){
+  if(e.pointerType !== 'mouse' && sticky && performance.now() < sticky.until){
+    var sdx = e.clientX - sticky.it.x, sdy = e.clientY - sticky.it.y;
+    if(Math.sqrt(sdx*sdx + sdy*sdy) < 100){
+      var sp = sticky.p; sticky = null; suppressTapUntil = performance.now() + 500;
+      openCard(sp);
+    }
+  }
+  rx = e.clientX; ry = e.clientY; rOn = true; lastAct = performance.now();
+});
+window.addEventListener('pointerup', function(e){
+  if(e.pointerType !== 'mouse'){
+    rOn = false; lastAct = performance.now();
+    if(winner && !card.classList.contains('open')) sticky = { it: winner, p: winner.p, until: performance.now() + 1600 };
+  }
+});
 window.addEventListener('pointercancel', function(){ rOn = false; });
 document.addEventListener('mouseleave', function(){ rOn = false; });
 var RADIUS = 165;
@@ -440,7 +455,15 @@ function frame(){
   if(fieldReady && document.getElementById('fieldView').classList.contains('on')){
     tickDust(performance.now());
     var nowF = performance.now();
-    if(!card.classList.contains('open') && nowF - lastAct > 4000){
+    if(card.classList.contains('open')){
+      px = rx; py = ry; pointerOn = rOn;
+    } else if(rOn){
+      px = rx; py = ry; pointerOn = true;
+      sticky = null; ff.it = null; ff.gapUntil = nowF + 400;
+    } else if(sticky && nowF < sticky.until){
+      px = sticky.it.x; py = sticky.it.y; pointerOn = true;
+    } else if(nowF - lastAct > 4000){
+      sticky = null;
       if(ff.it && nowF > ff.until){ ff.it = null; ff.gapUntil = nowF + 800; }
       if(!ff.it && nowF >= ff.gapUntil && instances.length){
         var cand = instances[Math.floor(Math.random() * instances.length)];
@@ -448,9 +471,10 @@ function frame(){
       }
       if(ff.it){ px = ff.it.x; py = ff.it.y; pointerOn = true; } else { pointerOn = false; }
     } else {
-      px = rx; py = ry; pointerOn = rOn;
+      pointerOn = false;
       ff.it = null; ff.gapUntil = nowF + 400;
     }
+    if(sticky && nowF >= sticky.until) sticky = null;
     var best = null, bestD = Infinity, i, it, dx, dy, d;
     if(pointerOn){
       for(i=0;i<instances.length;i++){
