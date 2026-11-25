@@ -152,6 +152,20 @@
   .vidWrap video{position:absolute;inset:0;width:100%;height:100%;border:0;border-radius:10px;object-fit:cover;background:#000;box-shadow:0 10px 30px rgba(90,55,15,.22);}
   #fieldView{touch-action:none;}
   @media (max-width:640px){ .anchorWord{color:rgba(216,222,235,.26);} }
+  /* PORTAL */
+  #portalView{position:relative;overflow:hidden;background:#060809 url('assets/lake-poster.jpg') center/cover no-repeat;}
+  #portalView .pVid{position:absolute;inset:0;}
+  #portalView .pVid video{width:100%;height:100%;object-fit:cover;display:block;}
+  #portalView .pVeil{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 42%, rgba(4,8,10,0) 30%, rgba(4,8,10,.38) 78%, rgba(3,6,8,.72) 100%),linear-gradient(rgba(4,8,10,.20), rgba(4,8,10,0) 30%, rgba(4,8,10,0) 62%, rgba(4,8,10,.45));}
+  #portalView .pFrame{position:absolute;inset:16px;border:1px solid rgba(240,246,250,.34);outline:1px solid rgba(240,246,250,.12);outline-offset:5px;pointer-events:none;}
+  #portalView .pInner{position:relative;z-index:3;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;text-align:center;padding:0 20px 11vh;}
+  #portalView .pKick{font-size:11.5px;letter-spacing:.42em;text-transform:uppercase;color:rgba(233,240,246,.85);text-shadow:0 1px 8px rgba(0,0,0,.8);margin-bottom:14px;text-indent:.42em;}
+  #portalView h1{font-weight:600;font-size:clamp(34px,6vw,58px);color:#fbfdff;text-shadow:0 2px 6px rgba(0,0,0,.75),0 4px 34px rgba(0,0,0,.8);letter-spacing:.01em;}
+  #portalView .pTitles{margin-top:10px;font-size:clamp(12.5px,1.8vw,16.5px);letter-spacing:.12em;color:#e3ebf2;text-shadow:0 1px 4px rgba(0,0,0,.9),0 2px 18px rgba(0,0,0,.85);}
+  #portalView .pEnter{margin-top:34px;display:inline-block;font-size:17px;letter-spacing:.30em;text-indent:.30em;text-transform:uppercase;color:#fdfefe;text-decoration:none;padding:15px 40px;border:1px solid rgba(244,249,252,.75);background:rgba(10,16,20,.22);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);box-shadow:0 0 0 1px rgba(255,255,255,.10) inset,0 0 26px rgba(190,220,240,.18);transition:all .35s ease;}
+  #portalView .pEnter:hover{background:rgba(240,248,252,.16);box-shadow:0 0 0 1px rgba(255,255,255,.22) inset,0 0 40px rgba(190,220,240,.35);}
+  body.portalOn #nav{display:none;}
+  @media (max-width:640px){ #portalView .pFrame{inset:10px;} #portalView .pInner{padding-bottom:9vh;} }
 </style>
 </head>
 <body>
@@ -164,6 +178,18 @@
 
   <svg class="cragSvg" viewBox="0 0 1440 34" preserveAspectRatio="none" aria-hidden="true"><path d="M0,0 L1440,0 L1440,8 L1440,16 L1403,18 L1372,8 L1310,9 L1259,24 L1228,22 L1187,7 L1154,19 L1100,8 L1057,8 L994,19 L963,24 L928,13 L897,24 L844,7 L802,7 L739,10 L693,19 L656,23 L621,24 L574,23 L535,9 L471,26 L431,17 L397,23 L365,24 L334,25 L293,21 L231,19 L183,20 L126,17 L79,13 L40,28 L0,12 Z" fill="#04060c"/></svg>
 </nav>
+
+<!-- PORTAL -->
+<section class="view" id="portalView">
+  <div class="pVid"><video autoplay muted loop playsinline preload="auto" poster="assets/lake-poster.jpg"><source src="assets/portal-loop.mp4" type="video/mp4"></video></div>
+  <div class="pVeil"></div><div class="pFrame"></div>
+  <div class="pInner">
+    <div class="pKick">A threshold</div>
+    <h1>Gregory Alexander</h1>
+    <div class="pTitles">Musician · Interdisciplinary Artist · Teaching Artist · Coach · Facilitator</div>
+    <a class="pEnter" href="#cover">Enter</a>
+  </div>
+</section>
 
 <!-- COVER -->
 <section class="view" id="cover">
@@ -661,14 +687,15 @@ function renderAbout(){
 }
 
 /* ================= ROUTING ================= */
-var VIEWS = { cover:'cover', field:'fieldView', basics:'basicsView', everything:'everythingView', about:'aboutView', room:'roomView' };
+var VIEWS = { portal:'portalView', cover:'cover', field:'fieldView', basics:'basicsView', everything:'everythingView', about:'aboutView', room:'roomView' };
 function route(){
-  var h = (location.hash || '#cover').slice(1);
+  var h = (location.hash || '#portal').slice(1);
   var parts = h.split('/'), name = parts[0] || 'cover';
-  if(!VIEWS[name]) name = 'cover';
+  if(!VIEWS[name]) name = 'portal';
   Object.keys(VIEWS).forEach(function(k){ document.getElementById(VIEWS[k]).classList.toggle('on', k === name); });
   document.body.classList.toggle('lightnav', ['room','everything','about','basics'].indexOf(name) >= 0);
   document.body.classList.toggle('fieldOn', name === 'field');
+  document.body.classList.toggle('portalOn', name === 'portal');
   closeCard();
   if(name === 'room') renderRoom(parts[1] || 'study');
   if(name === 'field'){ layout(); }
