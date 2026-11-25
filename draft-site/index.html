@@ -143,6 +143,7 @@
   .basicsSec{font-weight:normal;font-size:23px;color:#8a3c0c;margin:36px 0 6px;}
   .vidWrap{position:relative;padding-top:56.25%;margin:8px 0 20px;}
   .vidWrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0;border-radius:10px;box-shadow:0 10px 30px rgba(90,55,15,.22);}
+  #fieldView{touch-action:none;}
 </style>
 </head>
 <body>
@@ -427,13 +428,29 @@ function tickDust(t){
   dctx.globalAlpha = 1;
 }
 var px = -9999, py = -9999, pointerOn = false, winner = null;
-window.addEventListener('pointermove', function(e){ px = e.clientX; py = e.clientY; pointerOn = true; });
-window.addEventListener('pointerdown', function(e){ px = e.clientX; py = e.clientY; pointerOn = true; });
-document.addEventListener('mouseleave', function(){ pointerOn = false; });
+var rx = -9999, ry = -9999, rOn = false, lastAct = performance.now();
+var ff = { it: null, last: null, until: 0, gapUntil: 0 };
+window.addEventListener('pointermove', function(e){ rx = e.clientX; ry = e.clientY; rOn = true; lastAct = performance.now(); });
+window.addEventListener('pointerdown', function(e){ rx = e.clientX; ry = e.clientY; rOn = true; lastAct = performance.now(); });
+window.addEventListener('pointerup', function(e){ if(e.pointerType !== 'mouse'){ rOn = false; lastAct = performance.now(); } });
+window.addEventListener('pointercancel', function(){ rOn = false; });
+document.addEventListener('mouseleave', function(){ rOn = false; });
 var RADIUS = 165;
 function frame(){
   if(fieldReady && document.getElementById('fieldView').classList.contains('on')){
     tickDust(performance.now());
+    var nowF = performance.now();
+    if(!card.classList.contains('open') && nowF - lastAct > 4000){
+      if(ff.it && nowF > ff.until){ ff.it = null; ff.gapUntil = nowF + 800; }
+      if(!ff.it && nowF >= ff.gapUntil && instances.length){
+        var cand = instances[Math.floor(Math.random() * instances.length)];
+        if(cand && cand !== ff.last){ ff.it = cand; ff.last = cand; ff.until = nowF + 2300; }
+      }
+      if(ff.it){ px = ff.it.x; py = ff.it.y; pointerOn = true; } else { pointerOn = false; }
+    } else {
+      px = rx; py = ry; pointerOn = rOn;
+      ff.it = null; ff.gapUntil = nowF + 400;
+    }
     var best = null, bestD = Infinity, i, it, dx, dy, d;
     if(pointerOn){
       for(i=0;i<instances.length;i++){
