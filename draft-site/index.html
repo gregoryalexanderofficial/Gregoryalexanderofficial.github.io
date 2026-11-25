@@ -144,6 +144,7 @@
   .vidWrap{position:relative;padding-top:56.25%;margin:8px 0 20px;}
   .vidWrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0;border-radius:10px;box-shadow:0 10px 30px rgba(90,55,15,.22);}
   #fieldView{touch-action:none;}
+  @media (max-width:640px){ .anchorWord{color:rgba(216,222,235,.26);} }
 </style>
 </head>
 <body>
@@ -380,13 +381,19 @@ function layout(){
   var fv = document.getElementById('fieldView');
   W = fv.clientWidth; H = fv.clientHeight;
   baseFS = Math.max(10.5, Math.min(13.5, W/95));
-  if(W < 640){ surgeK = 2.4; blurMax = 0.7; restO = 0.22; baseFS = Math.max(13.5, Math.min(15.5, W/26)); }
+  if(W < 640){ surgeK = 2.2; blurMax = 0.8; restO = 0.22; baseFS = Math.max(13, Math.min(14.5, W/27)); }
   else { surgeK = 1.75; blurMax = 1.1; restO = 0.13; }
   var anchorPos = {};
   ANCHORS.forEach(function(a){ anchorPos[a.t.toLowerCase()] = { x: a.x/100*W, y: a.y/100*H }; });
   var homeOf = { study:'study', ceremony:'ceremony', stage:'stage', create:'create', coach:'coaching', listen:'listen', studio:'studio' };
   function gauss(){ return (rnd() + rnd() + rnd() - 1.5) / 1.5; }
+  var totals = {}, seenN = {};
+  instances.forEach(function(q){ totals[q.p] = (totals[q.p] || 0) + 1; });
   instances.forEach(function(it){
+    seenN[it.p] = (seenN[it.p] || 0) + 1;
+    var quota = (W < 640) ? Math.max(2, Math.round(totals[it.p] * 0.45)) : totals[it.p];
+    it.hidden = seenN[it.p] > quota;
+    it.el.style.display = it.hidden ? 'none' : '';
     var home = anchorPos[homeOf[it.p.c]];
     if(home && rnd() < 0.72){
       it.x = home.x + gauss()*W*0.16;
@@ -396,8 +403,9 @@ function layout(){
       it.y = 100 + rnd()*(H - 130);
     }
     it.x = Math.max(24, Math.min(W - 24, it.x));
-    it.y = Math.max(84, Math.min(H - 16, it.y));
+    it.y = Math.max(W < 640 ? 150 : 84, Math.min(H - 16, it.y));
     it.el.style.fontSize = (baseFS*it.z*1.0) + 'px';
+    it.w = it.el.offsetWidth;
     it.el.style.left = it.x + 'px'; it.el.style.top = it.y + 'px';
   });
   anchorEls.forEach(function(o){
@@ -413,10 +421,10 @@ function drawDust(){
   dust.width = W; dust.height = H;
   stars = [];
   var drnd = mulberry32(777);
-  for(var i=0;i<260;i++){
+  for(var i=0;i<330;i++){
     var sr = drnd();
-    stars.push({ x: drnd()*W, y: drnd()*H, r: sr < 0.12 ? (drnd()*1.2 + 0.6) : (drnd()*0.55 + 0.15),
-      a: drnd()*0.30 + 0.06, ph: drnd()*6.28, sp: drnd()*1.4 + 0.3, amp: drnd()*0.22 + 0.05 });
+    stars.push({ x: drnd()*W, y: drnd()*H, r: sr < 0.12 ? (drnd()*1.5 + 0.7) : (drnd()*0.7 + 0.2),
+      a: drnd()*0.42 + 0.10, ph: drnd()*6.28, sp: drnd()*1.4 + 0.3, amp: drnd()*0.30 + 0.08 });
   }
 }
 function tickDust(t){
@@ -478,11 +486,11 @@ function frame(){
       if(nowF >= nextTw && instances.length){
         var actN = 0, qi;
         for(qi=0; qi<instances.length; qi++){ if(instances[qi].tw) actN++; }
-        if(actN < 5){
+        if(actN < 7){
           var cand2 = instances[Math.floor(Math.random() * instances.length)];
-          if(cand2 && !cand2.tw && cand2 !== lastTw){ cand2.tw = { start: nowF, dur: 1000 + Math.random()*1500, peak: 0.5 + Math.random()*0.5 }; lastTw = cand2; }
+          if(cand2 && !cand2.tw && !cand2.hidden && cand2 !== lastTw){ cand2.tw = { start: nowF, dur: 900 + Math.random()*1100, peak: 0.55 + Math.random()*0.45 }; lastTw = cand2; }
         }
-        nextTw = nowF + 260 + Math.random()*620;
+        nextTw = nowF + 150 + Math.random()*380;
       }
       twByP = {};
       for(var tj=0; tj<instances.length; tj++){
@@ -497,7 +505,7 @@ function frame(){
     var best = null, bestD = Infinity, i, it, dx, dy, d;
     if(pointerOn){
       for(i=0;i<instances.length;i++){
-        it = instances[i]; dx = it.x - px; dy = it.y - py; d = Math.sqrt(dx*dx + dy*dy);
+        it = instances[i]; if(it.hidden) continue; dx = it.x - px; dy = it.y - py; d = Math.sqrt(dx*dx + dy*dy);
         if(it === winner) d *= 0.92;
         if(d < bestD){ bestD = d; best = it; }
       }
@@ -506,6 +514,7 @@ function frame(){
     winner = best;
     for(var k=0;k<instances.length;k++){
       var o = instances[k], target = 0;
+      if(o.hidden) continue;
       if(pointerOn){
         var ddx = o.x - px, ddy = o.y - py, dd = Math.sqrt(ddx*ddx + ddy*ddy);
         target = Math.max(0, 1 - dd/190) * 0.38;
@@ -517,11 +526,20 @@ function frame(){
         if(twByP[o.p]) tvv = Math.max(tvv, twByP[o.p] * 0.3);
         target = Math.max(target, tvv);
       }
-      var rate = (o === winner) ? 0.34 : 0.16;
+      var rate = (o === winner) ? 0.34 : (o.tw ? 0.30 : 0.16);
       o.f += (target - o.f) * rate;
       if(o.f < 0.004 && target === 0) o.f = 0;
       var f = o.f;
-      o.el.style.transform = 'translate(-50%,-50%) scale(' + (1 + f*surgeK).toFixed(3) + ')';
+      var scF = 1 + f*surgeK, shX = 0, shY = 0;
+      if(f > 0.03 && o.w){
+        var hwF = o.w * scF / 2;
+        if(o.x - hwF < 4) shX = 4 - (o.x - hwF);
+        else if(o.x + hwF > W - 4) shX = (W - 4) - (o.x + hwF);
+        var hhF = baseFS * scF * 0.62, topF = (W < 640 ? 128 : 66);
+        if(o.y - hhF < topF) shY = topF - (o.y - hhF);
+        else if(o.y + hhF > H - 18) shY = (H - 18) - (o.y + hhF);
+      }
+      o.el.style.transform = 'translate(-50%,-50%) translate(' + shX.toFixed(1) + 'px,' + shY.toFixed(1) + 'px) scale(' + scF.toFixed(3) + ')';
       o.el.style.opacity = (restO + f*(1 - restO)).toFixed(3);
       o.el.style.zIndex = String(2 + Math.round(f*40));
       if(Math.abs(f - o.lastB) > 0.06 || (f === 0 && o.lastB !== 0) || (f > 0.97 && o.lastB <= 0.97)){
